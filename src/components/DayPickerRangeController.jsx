@@ -341,8 +341,15 @@ export default class DayPickerRangeController extends React.Component {
         modifiers = this.deleteModifierFromRange(
           modifiers,
           startSpan,
-          startSpan.clone().add(minimumNights, 'days'),
+          startSpan.clone().add(prevMinimumNights, 'days'),
           'blocked-minimum-nights',
+        );
+
+        modifiers = this.deleteModifierFromRange(
+          modifiers,
+          startSpan,
+          startSpan.clone().add(prevMinimumNights, 'days'),
+          'blocked',
         );
       }
 
