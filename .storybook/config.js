@@ -56,6 +56,7 @@ setOptions({
 });
 
 function loadStories() {
+  require('../stories/DateTimePicker');
   require('../stories/DateRangePicker');
   require('../stories/DateRangePicker_input');
   require('../stories/DateRangePicker_calendar');
