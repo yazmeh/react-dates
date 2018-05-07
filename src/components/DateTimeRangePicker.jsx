@@ -18,6 +18,7 @@ import isInclusivelyAfterDay from '../utils/isInclusivelyAfterDay';
 import disableScroll from '../utils/disableScroll';
 
 import DateRangePickerInputController from './DateRangePickerInputController';
+import DateRangeDisplayController from "./DateRangeDisplayController";
 import DayTimePickerRangeController from './DayTimePickerRangeController';
 import OutsideClickHandler from './OutsideClickHandler';
 import CloseButton from './CloseButton';
@@ -121,11 +122,19 @@ const defaultProps = {
 class DateTimeRangePicker extends React.Component {
     constructor(props) {
         super(props);
+        const {
+            startDate,
+            endDate,
+        }=props;
         this.state = {
             dayPickerContainerStyles: {},
             isDateRangePickerInputFocused: false,
             isDayPickerFocused: false,
             showKeyboardShortcuts: false,
+            selected:{
+                startDate,
+                endDate,
+            }
         };
 
         this.isTouchDevice = false;
@@ -135,7 +144,7 @@ class DateTimeRangePicker extends React.Component {
         this.onDayPickerFocus = this.onDayPickerFocus.bind(this);
         this.onDayPickerBlur = this.onDayPickerBlur.bind(this);
         this.showKeyboardShortcutsPanel = this.showKeyboardShortcutsPanel.bind(this);
-
+        this.dateChange=this.dateChange.bind(this);
         this.responsivizePickerPosition = this.responsivizePickerPosition.bind(this);
         this.disableScroll = this.disableScroll.bind(this);
 
@@ -181,7 +190,6 @@ class DateTimeRangePicker extends React.Component {
         if (this.removeEventListener) this.removeEventListener();
         if (this.enableScroll) this.enableScroll();
     }
-
     onOutsideClick(event) {
         const {
             onFocusChange,
@@ -201,7 +209,12 @@ class DateTimeRangePicker extends React.Component {
         onFocusChange(null);
         onClose({ startDate, endDate });
     }
-
+    dateChange({startDate,endDate}){
+        if (startDate && endDate){
+            this.setState({...this.state,selected:{startDate,endDate}})
+        }
+        this.props.onDatesChange({ startDate, endDate })
+    }
     onDateRangePickerInputFocus(focusedInput) {
         const {
             onFocusChange,
@@ -348,6 +361,7 @@ class DateTimeRangePicker extends React.Component {
             isDayBlocked,
             isDayHighlighted,
             isOutsideRange,
+            isDateRangePickerInputFocused,
             numberOfMonths,
             orientation,
             monthFormat,
@@ -366,6 +380,8 @@ class DateTimeRangePicker extends React.Component {
             is24HourFormat,
             startDate,
             endDate,
+            startDateId,
+            endDateId,
             minimumNights,
             keepOpenOnDateSelect,
             renderCalendarDay,
@@ -389,7 +405,7 @@ class DateTimeRangePicker extends React.Component {
             disabled,
             theme: { reactDates },
         } = this.props;
-        const { dayPickerContainerStyles, isDayPickerFocused, showKeyboardShortcuts } = this.state;
+        const { dayPickerContainerStyles, isDayPickerFocused, showKeyboardShortcuts, selected } = this.state;
 
         const onOutsideClick = (!withFullScreenPortal && withPortal)
             ? this.onOutsideClick
@@ -427,14 +443,25 @@ class DateTimeRangePicker extends React.Component {
                     dayPickerContainerStyles,
                 )}
                 onClick={onOutsideClick}
-            >
+            >   
+                <DateRangeDisplayController
+                    startDate={selected.startDate}
+                    startDateId={startDateId}
+                    isStartDateFocused={focusedInput === START_DATE}
+                    endDate={selected.endDate}
+                    endDateId={endDateId}
+                    isEndDateFocused={focusedInput === END_DATE}
+                    onFocusChange={onFocusChange}
+                    isFocused={isDateRangePickerInputFocused}
+
+                />
                 <DayTimePickerRangeController
                     orientation={orientation}
                     enableOutsideDays={enableOutsideDays}
                     numberOfMonths={numberOfMonths}
                     onPrevMonthClick={onPrevMonthClick}
                     onNextMonthClick={onNextMonthClick}
-                    onDatesChange={onDatesChange}
+                    onDatesChange={this.dateChange}
                     onFocusChange={onFocusChange}
                     onClose={onClose}
                     focusedInput={focusedInput}
@@ -525,7 +552,7 @@ class DateTimeRangePicker extends React.Component {
             styles,
         } = this.props;
 
-        const { isDateRangePickerInputFocused } = this.state;
+        const { isDateRangePickerInputFocused,selected } = this.state;
 
         const onOutsideClick = (!withPortal && !withFullScreenPortal) ? this.onOutsideClick : undefined;
 
@@ -541,11 +568,11 @@ class DateTimeRangePicker extends React.Component {
             >
                 <OutsideClickHandler onOutsideClick={onOutsideClick}>
                     <DateRangePickerInputController
-                        startDate={startDate}
+                        startDate={selected.startDate}
                         startDateId={startDateId}
                         startDatePlaceholderText={startDatePlaceholderText}
                         isStartDateFocused={focusedInput === START_DATE}
-                        endDate={endDate}
+                        endDate={selected.endDate}
                         endDateId={endDateId}
                         endDatePlaceholderText={endDatePlaceholderText}
                         isEndDateFocused={focusedInput === END_DATE}
@@ -566,7 +593,7 @@ class DateTimeRangePicker extends React.Component {
                         isOutsideRange={isOutsideRange}
                         minimumNights={minimumNights}
                         withFullScreenPortal={withFullScreenPortal}
-                        onDatesChange={onDatesChange}
+                        onDatesChange={this.dateChange}
                         onFocusChange={this.onDateRangePickerInputFocus}
                         onKeyDownArrowDown={this.onDayPickerFocus}
                         onKeyDownQuestionMark={this.showKeyboardShortcutsPanel}
