@@ -1,9 +1,9 @@
 import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import DateTimeRangePicker from '../src/components/DateTimeRangePicker';
-import DateRangePickerShape from '../src/shapes/DateRangePickerShape';
-import { DateRangePickerPhrases } from '../src/defaultPhrases';
+import DateTimeRangePicker from './DateTimeRangePicker';
+import DateRangePickerShape from '../shapes/DateRangePickerShape';
+import { DateRangePickerPhrases } from '../defaultPhrases';
 import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, ANCHOR_LEFT } from '../src/constants';
 
 const propTypes = {
