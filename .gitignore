@@ -45,5 +45,8 @@ _gh-pages
 yarn.lock
 package-lock.json
 
+examples/
+.storybook/
+.storybook-css/
 css/styles.css
 .vscode
