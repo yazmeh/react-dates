@@ -16,6 +16,7 @@ import getInputHeight from '../utils/getInputHeight';
 import isInclusivelyAfterDay from '../utils/isInclusivelyAfterDay';
 import disableScroll from '../utils/disableScroll';
 
+import SingleDateRangeController from "./SingleDateRangeController";
 import DateRangePickerInputController from './DateRangePickerInputController';
 import DayPickerRangeController from './DayPickerRangeController';
 import OutsideClickHandler from './OutsideClickHandler';
@@ -536,7 +537,7 @@ class DateRangePicker extends React.Component {
         )}
       >
         <OutsideClickHandler onOutsideClick={onOutsideClick}>
-          <DateRangePickerInputController
+          <SingleDateRangeController
             startDate={startDate}
             startDateId={startDateId}
             startDatePlaceholderText={startDatePlaceholderText}
@@ -546,36 +547,8 @@ class DateRangePicker extends React.Component {
             endDatePlaceholderText={endDatePlaceholderText}
             isEndDateFocused={focusedInput === END_DATE}
             displayFormat={displayFormat}
-            showClearDates={showClearDates}
-            showCaret={!withPortal && !withFullScreenPortal && !hideFang}
-            showDefaultInputIcon={showDefaultInputIcon}
-            inputIconPosition={inputIconPosition}
-            customInputIcon={customInputIcon}
-            customArrowIcon={customArrowIcon}
-            customCloseIcon={customCloseIcon}
-            disabled={disabled}
-            required={required}
-            readOnly={readOnly}
-            openDirection={openDirection}
-            reopenPickerOnClearDates={reopenPickerOnClearDates}
-            keepOpenOnDateSelect={keepOpenOnDateSelect}
-            isOutsideRange={isOutsideRange}
-            minimumNights={minimumNights}
-            withFullScreenPortal={withFullScreenPortal}
-            onDatesChange={onDatesChange}
             onFocusChange={this.onDateRangePickerInputFocus}
-            onKeyDownArrowDown={this.onDayPickerFocus}
-            onKeyDownQuestionMark={this.showKeyboardShortcutsPanel}
-            onClose={onClose}
-            phrases={phrases}
-            screenReaderMessage={screenReaderInputMessage}
             isFocused={isDateRangePickerInputFocused}
-            isRTL={isRTL}
-            noBorder={noBorder}
-            block={block}
-            small={small}
-            regular={regular}
-            verticalSpacing={verticalSpacing}
           />
 
           {this.maybeRenderDayPickerWithPortal()}

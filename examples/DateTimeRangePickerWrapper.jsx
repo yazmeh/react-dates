@@ -10,7 +10,7 @@ import { DateRangePickerPhrases } from '../src/defaultPhrases';
 import DateRangePickerShape from '../src/shapes/DateRangePickerShape';
 import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, ANCHOR_LEFT } from '../src/constants';
 import isInclusivelyAfterDay from '../src/utils/isInclusivelyAfterDay';
-
+const today = moment().hour(12);
 const propTypes = {
     // example props for the demo
     autoFocus: PropTypes.bool,
@@ -51,6 +51,7 @@ const defaultProps = {
     block: false,
     small: false,
     regular: false,
+    is24HourFormat:true,
 
     // calendar presentation and interaction related props
     renderMonth: null,
@@ -77,7 +78,7 @@ const defaultProps = {
     renderDayContents: null,
     minimumNights: 1,
     enableOutsideDays: false,
-    isDayBlocked: () => false,
+    isDayBlocked: (day) => day.isAfter(today),
     isOutsideRange: day => !isInclusivelyAfterDay(day, moment()),
     isDayHighlighted: () => false,
 
@@ -102,8 +103,8 @@ class DateRangePickerWrapper extends React.Component {
 
         this.state = {
             focusedInput,
-            startDate: props.initialStartDate,
-            endDate: props.initialEndDate,
+            startDate: moment().subtract(14,'days'),
+            endDate: moment(),
         };
 
         this.onDatesChange = this.onDatesChange.bind(this);
@@ -143,10 +144,12 @@ class DateRangePickerWrapper extends React.Component {
                     onDatesChange={this.onDatesChange}
                     is24HourFormat={true}
                     onFocusChange={this.onFocusChange}
-                    displayFormat="MM/DD/YYYY HH:mm:ss"
+                    displayFormat="DD/MM/YYYY HH:mm:ss"
                     keepOpenOnDateSelect={true}
                     focusedInput={focusedInput}
                     startDate={startDate}
+                    verticalSpacing={10}
+                    isDayBlocked={(day)=> moment().isBefore()}
                     endDate={endDate}
                 />
             </div>

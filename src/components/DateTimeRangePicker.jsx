@@ -17,6 +17,7 @@ import getInputHeight from '../utils/getInputHeight';
 import isInclusivelyAfterDay from '../utils/isInclusivelyAfterDay';
 import disableScroll from '../utils/disableScroll';
 
+import SingleDateRangeController from "./SingleDateRangeController";
 import DateRangePickerInputController from './DateRangePickerInputController';
 import DateRangeDisplayController from "./DateRangeDisplayController";
 import DayTimePickerRangeController from './DayTimePickerRangeController';
@@ -106,7 +107,7 @@ const defaultProps = {
     renderCalendarDay: undefined,
     renderDayContents: null,
     minimumNights: 1,
-    enableOutsideDays: false,
+    enableOutsideDays: true,
     isDayBlocked: () => false,
     isOutsideRange: day => !isInclusivelyAfterDay(day, moment()),
     isDayHighlighted: () => false,
@@ -567,7 +568,7 @@ class DateTimeRangePicker extends React.Component {
                 )}
             >
                 <OutsideClickHandler onOutsideClick={onOutsideClick}>
-                    <DateRangePickerInputController
+                    <SingleDateRangeController
                         startDate={selected.startDate}
                         startDateId={startDateId}
                         startDatePlaceholderText={startDatePlaceholderText}
@@ -577,36 +578,8 @@ class DateTimeRangePicker extends React.Component {
                         endDatePlaceholderText={endDatePlaceholderText}
                         isEndDateFocused={focusedInput === END_DATE}
                         displayFormat={displayFormat}
-                        showClearDates={showClearDates}
-                        showCaret={!withPortal && !withFullScreenPortal && !hideFang}
-                        showDefaultInputIcon={showDefaultInputIcon}
-                        inputIconPosition={inputIconPosition}
-                        customInputIcon={customInputIcon}
-                        customArrowIcon={customArrowIcon}
-                        customCloseIcon={customCloseIcon}
-                        disabled={disabled}
-                        required={required}
-                        readOnly={readOnly}
-                        openDirection={openDirection}
-                        reopenPickerOnClearDates={reopenPickerOnClearDates}
-                        keepOpenOnDateSelect={keepOpenOnDateSelect}
-                        isOutsideRange={isOutsideRange}
-                        minimumNights={minimumNights}
-                        withFullScreenPortal={withFullScreenPortal}
-                        onDatesChange={this.dateChange}
-                        onFocusChange={this.onDateRangePickerInputFocus}
-                        onKeyDownArrowDown={this.onDayPickerFocus}
-                        onKeyDownQuestionMark={this.showKeyboardShortcutsPanel}
-                        onClose={onClose}
-                        phrases={phrases}
-                        screenReaderMessage={screenReaderInputMessage}
-                        isFocused={isDateRangePickerInputFocused}
-                        isRTL={isRTL}
-                        noBorder={noBorder}
-                        block={block}
                         small={small}
-                        regular={regular}
-                        verticalSpacing={verticalSpacing}
+                        onFocusChange={this.onDateRangePickerInputFocus}
                     />
 
                     {this.maybeRenderDayPickerWithPortal()}

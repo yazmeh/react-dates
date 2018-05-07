@@ -101,13 +101,17 @@ class DateRangePickerWrapper extends React.Component {
     }
 
     this.state = {
-      focusedInput,
-      startDate: props.initialStartDate,
-      endDate: props.initialEndDate,
+      focusedInput, 
+      startDate: moment(),
+      endDate: moment().subtract(- 14, 'days'),
     };
 
     this.onDatesChange = this.onDatesChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
+    this.onDatesChange({
+      startDate: moment().subtract(-14, 'days'),
+      endDate: moment()
+    })
   }
 
   onDatesChange({ startDate, endDate }) {
@@ -143,6 +147,7 @@ class DateRangePickerWrapper extends React.Component {
           onDatesChange={this.onDatesChange}
           onFocusChange={this.onFocusChange}
           displayFormat="MM/DD/YYYY HH:MM:SS"
+          verticalSpacing={0}
           keepOpenOnDateSelect={true}
           focusedInput={focusedInput}
           startDate={startDate}
