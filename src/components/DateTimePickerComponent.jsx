@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import DateTimeRangePicker from './DateTimeRangePicker';
 import DateRangePickerShape from '../shapes/DateRangePickerShape';
 import { DateRangePickerPhrases } from '../defaultPhrases';
-import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, ANCHOR_LEFT } from '../src/constants';
+import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, ANCHOR_LEFT } from '../constants';
 
 const propTypes = {
     ...omit(DateRangePickerShape, [
