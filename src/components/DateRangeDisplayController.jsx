@@ -10,82 +10,82 @@ import { START_DATE, END_DATE, ICON_BEFORE_POSITION, OPEN_DOWN } from '../consta
 import DateRangeDisplay from './DateRangeDisplay';
 
 const propTypes = forbidExtraProps({
-    startDate: momentPropTypes.momentObj,
-    startDateId: PropTypes.string,
-    isStartDateFocused: PropTypes.bool,
+  startDate: momentPropTypes.momentObj,
+  startDateId: PropTypes.string,
+  isStartDateFocused: PropTypes.bool,
 
-    endDate: momentPropTypes.momentObj,
-    endDateId: PropTypes.string,
-    isEndDateFocused: PropTypes.bool,
+  endDate: momentPropTypes.momentObj,
+  endDateId: PropTypes.string,
+  isEndDateFocused: PropTypes.bool,
 
-    onFocusChange: PropTypes.func,
-    // accessibility
-    isFocused: PropTypes.bool,
+  onFocusChange: PropTypes.func,
+  // accessibility
+  isFocused: PropTypes.bool,
 
-    // i18n,
+  // i18n,
 });
 
 const defaultProps = {
-    startDate: null,
-    startDateId: START_DATE,
-    isStartDateFocused: false,
+  startDate: null,
+  startDateId: START_DATE,
+  isStartDateFocused: false,
 
-    endDate: null,
-    endDateId: END_DATE,
-    isEndDateFocused: false,
+  endDate: null,
+  endDateId: END_DATE,
+  isEndDateFocused: false,
 
-    onFocusChange() { },
+  onFocusChange() { },
 
-    // accessibility
-    isFocused: false,
+  // accessibility
+  isFocused: false,
 };
 
 export default class DateRangeDisplayController extends React.Component {
-    constructor(props) {
-        super(props);
-        this.onStartDateFocus = this.onStartDateFocus.bind(this);
-        this.onEndDateFocus = this.onEndDateFocus.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.onStartDateFocus = this.onStartDateFocus.bind(this);
+    this.onEndDateFocus = this.onEndDateFocus.bind(this);
+  }
 
 
-    onEndDateFocus() {
-        const {
-            startDate,
-            onFocusChange,
-        } = this.props;
-        onFocusChange(END_DATE);        
-    }
+  onEndDateFocus() {
+    const {
+      startDate,
+      onFocusChange,
+    } = this.props;
+    onFocusChange(END_DATE);
+  }
 
-    onStartDateFocus() {
-        const { onFocusChange } = this.props;
-        onFocusChange(START_DATE);
-    }
+  onStartDateFocus() {
+    const { onFocusChange } = this.props;
+    onFocusChange(START_DATE);
+  }
 
-    render() {
-        const {
-            startDate,
-            startDateId,
-            isStartDateFocused,
-            endDate,
-            endDateId,
-            isEndDateFocused,
-            isFocused,
-        } = this.props;
+  render() {
+    const {
+      startDate,
+      startDateId,
+      isStartDateFocused,
+      endDate,
+      endDateId,
+      isEndDateFocused,
+      isFocused,
+    } = this.props;
 
-        return (
-            <DateRangeDisplay
-                startDate={startDate}
-                startDateId={startDateId}
-                isStartDateFocused={isStartDateFocused}
-                endDate={endDate}
-                endDateId={endDateId}
-                isEndDateFocused={isEndDateFocused}
-                isFocused={isFocused}
-                onStartDateFocus={this.onStartDateFocus}
-                onEndDateFocus={this.onEndDateFocus}
-            />
-        );
-    }
+    return (
+      <DateRangeDisplay
+        startDate={startDate}
+        startDateId={startDateId}
+        isStartDateFocused={isStartDateFocused}
+        endDate={endDate}
+        endDateId={endDateId}
+        isEndDateFocused={isEndDateFocused}
+        isFocused={isFocused}
+        onStartDateFocus={this.onStartDateFocus}
+        onEndDateFocus={this.onEndDateFocus}
+      />
+    );
+  }
 }
 
 DateRangeDisplayController.propTypes = propTypes;

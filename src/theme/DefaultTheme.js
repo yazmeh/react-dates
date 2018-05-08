@@ -55,17 +55,17 @@ export default {
       textDisabled: core.border,
       textFocused: '#007a87',
       placeholderText: '#757575',
-      confirmButton:{
-        apply:{
-          background:'#EC5959',
-          disabled:'#f28d8d',
-          text:'#FFFFFF',
+      confirmButton: {
+        apply: {
+          background: '#EC5959',
+          disabled: '#f28d8d',
+          text: '#FFFFFF',
         },
-        cancel:{
-          background:'#B3BACF',
-          disabled:'#B3BACF',
-          text:'#FFFFFF'
-        }
+        cancel: {
+          background: '#B3BACF',
+          disabled: '#B3BACF',
+          text: '#FFFFFF',
+        },
       },
       outside: {
         backgroundColor: core.white,
@@ -179,12 +179,12 @@ export default {
       inputWidth_small: 90,
       arrowWidth: 24,
       arrowWidth_small: 19,
-      confirmButtonMinWidth:60,
-      confirmButtonHeight:30,
-      confirmButtonPadding:{
-        vertical:6,
-        horizontal:20,
-      }
+      confirmButtonMinWidth: 60,
+      confirmButtonHeight: 30,
+      confirmButtonPadding: {
+        vertical: 6,
+        horizontal: 20,
+      },
     },
 
     font: {

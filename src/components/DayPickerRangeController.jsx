@@ -451,9 +451,7 @@ export default class DayPickerRangeController extends React.Component {
 
     let { startDate, endDate } = this.props;
     let day;
-    if (focusedInput === START_DATE && startDate) { day = selDay.clone().set({ hour: startDate.hour(), minute: startDate.minute()})}
-    else if (focusedInput === END_DATE && endDate) { day = selDay.clone().set({ hour: endDate.hour(), minute: endDate.minute()})}
-    else if (focusedInput){day=selDay}
+    if (focusedInput === START_DATE && startDate) { day = selDay.clone().set({ hour: startDate.hour(), minute: startDate.minute() }); } else if (focusedInput === END_DATE && endDate) { day = selDay.clone().set({ hour: endDate.hour(), minute: endDate.minute() }); } else if (focusedInput) { day = selDay; }
     if (startDateOffset || endDateOffset) {
       startDate = getSelectedDateOffset(startDateOffset, day);
       endDate = getSelectedDateOffset(endDateOffset, day);

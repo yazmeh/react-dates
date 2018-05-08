@@ -19,112 +19,111 @@ import toLocalizedDateString from '../utils/toLocalizedDateString';
 import { START_DATE, END_DATE, ICON_BEFORE_POSITION, OPEN_DOWN } from '../constants';
 
 const propTypes = forbidExtraProps({
-    startDate: momentPropTypes.momentObj,
-    startDateId: PropTypes.string,
-    startDatePlaceholderText: PropTypes.string,
-    isStartDateFocused: PropTypes.bool,
+  startDate: momentPropTypes.momentObj,
+  startDateId: PropTypes.string,
+  startDatePlaceholderText: PropTypes.string,
+  isStartDateFocused: PropTypes.bool,
 
-    endDate: momentPropTypes.momentObj,
-    endDateId: PropTypes.string,
-    endDatePlaceholderText: PropTypes.string,
-    isEndDateFocused: PropTypes.bool,
+  endDate: momentPropTypes.momentObj,
+  endDateId: PropTypes.string,
+  endDatePlaceholderText: PropTypes.string,
+  isEndDateFocused: PropTypes.bool,
 
-    rangeSeparator: PropTypes.string,
-    displayFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  rangeSeparator: PropTypes.string,
+  displayFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 
-    onFocusChange: PropTypes.func,
+  onFocusChange: PropTypes.func,
 
-    // accessibility
-    isFocused: PropTypes.bool,
-    small:PropTypes.bool,
-    // i18n
+  // accessibility
+  isFocused: PropTypes.bool,
+  small: PropTypes.bool,
+  // i18n
 
-    isRTL: PropTypes.bool,
+  isRTL: PropTypes.bool,
 });
 
 const defaultProps = {
-    startDate: null,
-    startDateId: START_DATE,
-    startDatePlaceholderText: 'Start Date',
-    isStartDateFocused: false,
+  startDate: null,
+  startDateId: START_DATE,
+  startDatePlaceholderText: 'Start Date',
+  isStartDateFocused: false,
 
-    endDate: null,
-    endDateId: END_DATE,
-    endDatePlaceholderText: 'End Date',
-    isEndDateFocused: false,
+  endDate: null,
+  endDateId: END_DATE,
+  endDatePlaceholderText: 'End Date',
+  isEndDateFocused: false,
 
-    rangeSeparator:' - ',
-    displayFormat: () => moment.localeData().longDateFormat('L'),
+  rangeSeparator: ' - ',
+  displayFormat: () => moment.localeData().longDateFormat('L'),
 
-    onFocusChange() { },
+  onFocusChange() { },
 
-    // accessibility
-    isFocused: false,
-    small:false,
-    isRTL: false,
+  // accessibility
+  isFocused: false,
+  small: false,
+  isRTL: false,
 };
 
 export default class SingleDateRangeController extends React.Component {
-    constructor(props) {
-        super(props);
-        this.onStartDateFocus = this.onStartDateFocus.bind(this);
+  constructor(props) {
+    super(props);
+    this.onStartDateFocus = this.onStartDateFocus.bind(this);
+  }
+  onStartDateFocus() {
+    const { isStartDateFocused, isEndDateFocused, onFocusChange } = this.props;
+    if (isStartDateFocused || isEndDateFocused) {
+      onFocusChange(null);
+    } else {
+      onFocusChange(START_DATE);
     }
-    onStartDateFocus() {
-        const { isStartDateFocused, isEndDateFocused, onFocusChange } = this.props;
-        if (isStartDateFocused || isEndDateFocused){
-            onFocusChange(null);
-        }
-        else{
-            onFocusChange(START_DATE);
-        }
+  }
+
+  getDisplayFormat() {
+    const { displayFormat } = this.props;
+    return typeof displayFormat === 'string' ? displayFormat : displayFormat();
+  }
+
+  getDateString(date) {
+    const displayFormat = this.getDisplayFormat();
+    if (date && displayFormat) {
+      return date && date.format(displayFormat);
     }
+    return toLocalizedDateString(date);
+  }
 
-    getDisplayFormat() {
-        const { displayFormat } = this.props;
-        return typeof displayFormat === 'string' ? displayFormat : displayFormat();
-    }
+  render() {
+    const {
+      startDate,
+      startDateId,
+      startDatePlaceholderText,
+      isStartDateFocused,
+      rangeSeparator,
+      endDate,
+      endDateId,
+      endDatePlaceholderText,
+      isEndDateFocused,
+      isRTL,
+    } = this.props;
 
-    getDateString(date) {
-        const displayFormat = this.getDisplayFormat();
-        if (date && displayFormat) {
-            return date && date.format(displayFormat);
-        }
-        return toLocalizedDateString(date);
-    }
+    const startDateString = this.getDateString(startDate);
+    const endDateString = this.getDateString(endDate);
 
-    render() {
-        const {
-            startDate,
-            startDateId,
-            startDatePlaceholderText,
-            isStartDateFocused,
-            rangeSeparator,
-            endDate,
-            endDateId,
-            endDatePlaceholderText,
-            isEndDateFocused,
-            isRTL
-        } = this.props;
-
-        const startDateString = this.getDateString(startDate);
-        const endDateString = this.getDateString(endDate);
-
-        return (
-            <SingleDateRange
-                startDate={startDateString}
-                startDateId={startDateId}
-                startDatePlaceholderText={startDatePlaceholderText}
-                isStartDateFocused={isStartDateFocused}
-                rangeSeparator={rangeSeparator}
-                endDate={endDateString}
-                endDateId={endDateId}
-                endDatePlaceholderText={endDatePlaceholderText}
-                isEndDateFocused={isEndDateFocused}
-                onStartDateFocus={this.onStartDateFocus}
-                isRTL={isRTL}
-            />
-        );
-    }
+    return (
+      <SingleDateRange
+        startDate={startDateString}
+        startDateId={startDateId}
+        startDatePlaceholderText={startDatePlaceholderText}
+        isStartDateFocused={isStartDateFocused}
+        rangeSeparator={rangeSeparator}
+        endDate={endDateString}
+        endDateId={endDateId}
+        endDatePlaceholderText={endDatePlaceholderText}
+        isEndDateFocused={isEndDateFocused}
+        onStartDateFocus={this.onStartDateFocus}
+        isRTL={isRTL}
+      />
+    );
+  }
 }
 
 SingleDateRangeController.propTypes = propTypes;
