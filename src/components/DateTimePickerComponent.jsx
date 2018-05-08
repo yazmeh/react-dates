@@ -167,6 +167,7 @@ export default class DateTimePickerComponent extends React.Component{
             endDate,
             focusedInput,
         } = this.state;
+        return (
         <div>
             <DateTimeRangePicker
                 {...props}
@@ -182,5 +183,6 @@ export default class DateTimePickerComponent extends React.Component{
                 endDate={endDate}
             />
         </div>
+        )
     }
 }
