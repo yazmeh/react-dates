@@ -106,6 +106,9 @@ export default class DateTimePickerComponent extends React.Component{
         };
         this.onDatesChange = this.onDatesChange.bind(this);
         this.onFocusChange = this.onFocusChange.bind(this);
+        this.onApply=this.onApply.bind(this);
+        this.onCancel = this.onCancel.bind(this);
+        
     }
     onApply(newDates){
         const {onApply} = this.props
@@ -186,3 +189,5 @@ export default class DateTimePickerComponent extends React.Component{
         )
     }
 }
+DateTimePickerComponent.propTypes=propTypes;
+DateTimePickerComponent.defaultProps=defaultProps;
