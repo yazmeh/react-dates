@@ -78,7 +78,7 @@ const defaultProps = {
 
     stateDateWrapper: date => date,
 };
-class DateTimePickerComponent extends React.Component{
+export default class DateTimePickerComponent extends React.Component{
     constructor(props){
         super(props);
         const {
