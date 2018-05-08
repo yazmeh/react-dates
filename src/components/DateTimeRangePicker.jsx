@@ -40,10 +40,10 @@ import {
     DEFAULT_VERTICAL_SPACING,
 } from '../constants';
 
-const propTypes = forbidExtraProps({
+const propTypes = {
     ...withStylesPropTypes,
     ...DateTimeRangePickerShape,
-});
+};
 
 const defaultProps = {
     // required props for a functional interactive DateTimeRangePicker
