@@ -53,7 +53,7 @@ const defaultProps = {
     keepOpenOnDateSelect: true,
     reopenPickerOnClearDates: false,
     isRTL: false,
-
+    
     // navigation related props
     navPrev: null,
     navNext: null,
@@ -105,18 +105,29 @@ class DateTimePickerComponent extends React.Component{
         this.onDatesChange = this.onDatesChange.bind(this);
         this.onFocusChange = this.onFocusChange.bind(this);
     }
+    onApply(newDates){
+        const {onApply} = this.props
+        const { selected:{startDate,endDate} } = this.state
+        const oldDates={
+            startDate,
+            endDate,
+        }
+        this.setState({
+            selected:{...newDates}
+        })
+        onApply(newDates,oldDates)
+    }
+    onCancel(){
+        const { selected: { startDate, endDate } } = this.state;
+        const {onCancel} = this.props;
+        this.setState({
+            startDate,
+            endDate,
+        });
+        onCanel({startDate,endDate});        
+    }
     onDatesChange({ startDate, endDate }) {
         const { stateDateWrapper } = this.props;
-        if(startDate && endDate){
-            this.setState({
-                selected:{
-                    startDate,
-                    endDate,
-                },
-                startDate: startDate && stateDateWrapper(startDate),
-                endDate: endDate && stateDateWrapper(endDate),
-            })
-        }
         this.setState({
             startDate: startDate && stateDateWrapper(startDate),
             endDate: endDate && stateDateWrapper(endDate),
@@ -146,6 +157,8 @@ class DateTimePickerComponent extends React.Component{
                 displayFormat="DD/MM/YYYY HH:mm:ss"
                 focusedInput={focusedInput}
                 startDate={startDate}
+                onApply={this.onApply}
+                onCancel={this.onCancel}
                 verticalSpacing={10}
                 isDayBlocked={(day) => moment().isBefore()}
                 endDate={endDate}

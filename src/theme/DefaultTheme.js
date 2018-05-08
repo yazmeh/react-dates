@@ -55,7 +55,18 @@ export default {
       textDisabled: core.border,
       textFocused: '#007a87',
       placeholderText: '#757575',
-
+      confirmButton:{
+        apply:{
+          background:'#EC5959',
+          disabled:'#f28d8d',
+          text:'#FFFFFF',
+        },
+        cancel:{
+          background:'#B3BACF',
+          disabled:'#B3BACF',
+          text:'#FFFFFF'
+        }
+      },
       outside: {
         backgroundColor: core.white,
         backgroundColor_active: core.white,
@@ -154,13 +165,13 @@ export default {
       displayTextPaddingBottom: undefined,
       displayTextPaddingHorizontal: 10,
       displayTextPaddingLeft: undefined,
-      displayTextPaddingRight: undefined,
+      displayTextPaddingRight: 30,
       displayTextPaddingVertical_small: 5,
       displayTextPaddingTop_small: undefined,
       displayTextPaddingBottom_small: undefined,
       displayTextPaddingHorizontal_small: 10,
       displayTextPaddingLeft_small: undefined,
-      displayTextPaddingRight_small: undefined,
+      displayTextPaddingRight_small: 30,
     },
 
     sizing: {
@@ -168,6 +179,12 @@ export default {
       inputWidth_small: 90,
       arrowWidth: 24,
       arrowWidth_small: 19,
+      confirmButtonMinWidth:60,
+      confirmButtonHeight:30,
+      confirmButtonPadding:{
+        vertical:6,
+        horizontal:20,
+      }
     },
 
     font: {
@@ -175,7 +192,7 @@ export default {
       captionSize: 18,
       input: {
         size: 18,
-        lineHeight: '24px',
+        lineHeight: '20px',
         size_small: 14,
         lineHeight_small: '18px',
         styleDisabled: 'italic',

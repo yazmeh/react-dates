@@ -373,6 +373,8 @@ class DateTimeRangePicker extends React.Component {
             onNextMonthClick,
             onDatesChange,
             onFocusChange,
+            onApply,
+            onCancel,
             withPortal,
             withFullScreenPortal,
             daySize,
@@ -498,7 +500,17 @@ class DateTimeRangePicker extends React.Component {
                     transitionDuration={transitionDuration}
                     disabled={disabled}
                 />
-
+                {!!(onApply||onCancel) && 
+                    <div {...css(styles.DateTimeRangePicker_ConfirmWrapper)}>
+                    {!!onApply && 
+                        <button disabled={!startDate || !endDate} 
+                        onClick={() => onApply({startDate,endDate})}
+                        {...css(styles.DateTimeRangePicker_Apply, styles.DateTimeRangePicker_ConfirmButton)}>OK</button>}
+                    {!!onCancel && 
+                        <button disabled={!startDate || !endDate} 
+                            onClick={() => onApply({ startDate, endDate })}
+                        {...css(styles.DateTimeRangePicker_Cancel, styles.DateTimeRangePicker_ConfirmButton)}>Cancel</button>}
+                </div>}
                 {withFullScreenPortal && (
                     <button
                         {...css(styles.DateTimeRangePicker_closeButton)}
@@ -593,7 +605,7 @@ DateTimeRangePicker.propTypes = propTypes;
 DateTimeRangePicker.defaultProps = defaultProps;
 
 export { DateTimeRangePicker as PureDateTimeRangePicker };
-export default withStyles(({ reactDates: { color, zIndex } }) => ({
+export default withStyles(({ reactDates: { color, zIndex ,sizing} }) => ({
     DateTimeRangePicker: {
         position: 'relative',
         display: 'inline-block',
@@ -665,4 +677,36 @@ export default withStyles(({ reactDates: { color, zIndex } }) => ({
         width: 15,
         fill: color.core.grayLighter,
     },
+    DateTimeRangePicker_ConfirmWrapper: {
+        height:'50px',
+        padding:'10px'
+    },
+    DateTimeRangePicker_ConfirmButton:{
+        padding: `${sizing.confirmButtonPadding.vertical}px ${sizing.confirmButtonPadding.horizontal}px`,
+        height: `${sizing.confirmButtonHeight}px`,
+        minWidth: `${sizing.confirmButtonMinWidth}px`,
+        border:0,
+        marginRight:'10px',
+        fontWeight:800,
+        borderRadius:'5px',
+        textTransform:'uppercase',
+        fontSize:12,
+    },
+    DateTimeRangePicker_Apply:{
+        backgroundColor: color.confirmButton.apply.background,
+        color: color.confirmButton.apply.text,
+        ':disabled':{
+            backgroundColor: color.confirmButton.apply.disabled, 
+            cursor:'not-allowed'           
+        }
+    },
+    DateTimeRangePicker_Cancel: {
+        backgroundColor: color.confirmButton.cancel.background,
+        color: color.confirmButton.cancel.text,
+        ':disabled': {
+            backgroundColor: color.confirmButton.cancel.disabled,
+            cursor: 'not-allowed'
+        }
+    }
+
 }))(DateTimeRangePicker);

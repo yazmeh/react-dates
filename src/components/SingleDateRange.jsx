@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css, withStyles, withStylesPropTypes } from 'react-with-styles';
 import { START_DATE, END_DATE } from '../constants';
-
+import CalendarIcon from "./CalendarIcon";
 const propTypes={
     startDate:PropTypes.string,
     startDateId: PropTypes.string,
@@ -52,6 +52,9 @@ class SingleDateRange extends React.Component{
                 <div>
                     {`${startDate}${rangeSeparator}${endDate}`}
                 </div>    
+                <div {...css(styles.SingleDateRange_calendarIcon)}>
+                    <CalendarIcon {...css(styles.SingleDateRange_calendarIcon_svg)}/>
+                </div>
             </div>    
         )
     }
@@ -64,8 +67,9 @@ export default withStyles(({reactDates:{border,font,color,spacing}}) =>({
         backgroundColor:color.background,
         color:color.text,
         boxSizing:'content-box',
+        position:'relative',
         border:border.input.border,
-        borderRadius:'10px'
+        borderRadius:'5px'
     },
     SingleDateRange_small:{
         height:font.input.lineHeight_small,
@@ -84,6 +88,23 @@ export default withStyles(({reactDates:{border,font,color,spacing}}) =>({
         paddingBottom: spacing.displayTextPaddingBottom,
         paddingLeft: spacing.displayTextPaddingLeft,
         paddingRight: spacing.displayTextPaddingRight,
-    }
+    },
+    SingleDateRange_calendarIcon:{
+        position:'absolute',
+        height: font.input.lineHeight,
+        lineHeight: font.input.lineHeight,
+        paddingTop: spacing.displayTextPaddingTop||spacing.displayTextPaddingVertical  - 1,
+        paddingBottom: spacing.displayTextPaddingBottom||spacing.displayTextPaddingVertical - 1,
+        width:'30px',
+        top: `0`,
+        right:'0',
+        textAlign:'center',
+    },
+    SingleDateRange_calendarIcon_svg: {
+        fill: color.core.grayLight,
+        height: 15,
+        width: 14,
+        verticalAlign: 'middle',
+    },
 
 }) )(SingleDateRange)

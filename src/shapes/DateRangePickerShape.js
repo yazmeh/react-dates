@@ -69,7 +69,8 @@ export default {
   verticalHeight: nonNegativeInteger,
   transitionDuration: nonNegativeInteger,
   verticalSpacing: nonNegativeInteger,
-
+  onApply:PropTypes.func,
+  onCancel: PropTypes.func,
   // navigation related props
   navPrev: PropTypes.node,
   navNext: PropTypes.node,
