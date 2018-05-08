@@ -43,6 +43,7 @@ const defaultProps = {
 
     // calendar presentation and interaction related props
     renderMonth: null,
+    displayFormat:"DD/MM/YYYY HH:mm:ss",
     is24HourFormat:true,
     orientation: HORIZONTAL_ORIENTATION,
     anchorDirection: ANCHOR_LEFT,
@@ -150,12 +151,27 @@ export default class DateTimePickerComponent extends React.Component{
         }
     }
     render(){
+        const props = omit(this.props, [
+            'autoFocus',
+            'autoFocusEndDate',
+            'initialStartDate',
+            'initialEndDate',
+            'stateDateWrapper',
+            'onApply',
+            'onCancel',
+            'startDate',
+            'endDate',
+        ]);
+        const {
+            startDate,
+            endDate,
+        } = this.state;
         <div>
             <DateTimeRangePicker
                 {...props}
                 onDatesChange={this.onDatesChange}
                 onFocusChange={this.onFocusChange}
-                displayFormat="DD/MM/YYYY HH:mm:ss"
+                
                 focusedInput={focusedInput}
                 startDate={startDate}
                 onApply={this.onApply}
