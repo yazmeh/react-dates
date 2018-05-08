@@ -3,6 +3,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import DateTimeRangePicker from './DateTimeRangePicker';
 import DateRangePickerShape from '../shapes/DateRangePickerShape';
+import omit from 'lodash/omit';
 import { DateRangePickerPhrases } from '../defaultPhrases';
 import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, ANCHOR_LEFT } from '../constants';
 
