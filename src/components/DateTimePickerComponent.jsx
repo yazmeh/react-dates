@@ -163,6 +163,7 @@ export default class DateTimePickerComponent extends React.Component {
       'stateDateWrapper',
       'onApply',
       'onCancel',
+      'selected',
       'startDate',
       'endDate',
     ]);
@@ -170,6 +171,7 @@ export default class DateTimePickerComponent extends React.Component {
       startDate,
       endDate,
       focusedInput,
+      selected,
     } = this.state;
     return (
       <div>
@@ -177,7 +179,7 @@ export default class DateTimePickerComponent extends React.Component {
           {...props}
           onDatesChange={this.onDatesChange}
           onFocusChange={this.onFocusChange}
-
+          selected={selected}
           focusedInput={focusedInput}
           startDate={startDate}
           onApply={this.onApply}

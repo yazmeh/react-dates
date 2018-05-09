@@ -46,6 +46,11 @@ export default {
   regular: PropTypes.bool,
   keepFocusOnInput: PropTypes.bool,
   is24HourFormat: PropTypes.bool,
+  selected: PropTypes.shape({
+    startDate: momentPropTypes.momentObj,
+    endDate: momentPropTypes.momentObj}),
+  onApply: PropTypes.func,
+  onCancel: PropTypes.func,
   // calendar presentation and interaction related props
   renderMonth: PropTypes.func,
   orientation: OrientationShape,

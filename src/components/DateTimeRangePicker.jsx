@@ -70,6 +70,10 @@ const defaultProps = {
   regular: false,
   keepFocusOnInput: false,
   is24HourFormat: false,
+  selected:{
+    startDate:null,
+    endDate:null
+  },
   // calendar presentation and interaction related props
   renderMonth: null,
   orientation: HORIZONTAL_ORIENTATION,
@@ -575,9 +579,10 @@ class DateTimeRangePicker extends React.Component {
       small,
       regular,
       styles,
+      selected,
     } = this.props;
 
-    const { isDateRangePickerInputFocused, selected } = this.state;
+    const { isDateRangePickerInputFocused } = this.state;
 
     const onOutsideClick = (!withPortal && !withFullScreenPortal) ? this.onOutsideClick : undefined;
 
@@ -637,7 +642,7 @@ export default withStyles(({ reactDates: { color, zIndex, sizing } }) => ({
     zIndex: zIndex + 1,
     backgroundColor: color.background,
     position: 'absolute',
-  },
+  },  
 
   DateTimeRangePicker_picker__rtl: {
     direction: 'rtl',

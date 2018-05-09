@@ -24,7 +24,7 @@ class TimePicker extends React.Component {
     this.state = {
       hour: {
         min: is24HourFormat ? 0 : 1,
-        max: is24HourFormat ? 24 : 12,
+        max: is24HourFormat ? 23 : 12,
         format: is24HourFormat ? 'HH' : 'hh',
         value: time.format(is24HourFormat ? 'HH' : 'hh'),
       },
@@ -218,7 +218,7 @@ class TimePicker extends React.Component {
 TimePicker.propTypes = propTypes;
 export { TimePicker as PureTimePicker };
 export default withStyles((props) => {
-  console.log(props);
+  //console.log(props);
   return {
     TimePicker: {
       width: '50%',
@@ -276,6 +276,7 @@ export default withStyles((props) => {
       width: '100%',
       height: '30px',
       backgroundColor:'#fff',
+      borderRadius: '4px',
       border:'1px solid #D5D7DD',
       textAlign: 'center',
       margin: 'auto',

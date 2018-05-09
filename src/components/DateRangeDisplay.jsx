@@ -77,6 +77,7 @@ export default withStyles(({ reactDates: { color, sizing } }) => ({
     lineHeight: '30px',
     textAlign: 'center',
     borderRadius: '50%',
+    marginTop:'-5px',   
     backgroundColor: '#ECECEC',
     position: 'absolute',
     top: 'calc(50% - 15px)',
