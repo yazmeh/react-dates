@@ -113,7 +113,7 @@ const defaultProps = {
   minimumNights: 1,
   enableOutsideDays: true,
   isDayBlocked: () => false,
-  isOutsideRange: day => !isInclusivelyAfterDay(day, moment()),
+  isOutsideRange: day => !isInclusivelyBeforeDay(day, moment()),
   isDayHighlighted: () => false,
 
   // internationalization

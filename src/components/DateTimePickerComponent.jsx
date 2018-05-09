@@ -151,9 +151,8 @@ export default class DateTimePickerComponent extends React.Component {
         endDate: selected.startDate && stateDateWrapper(selected.startDate),
         focusedInput,
       });
-    } else {
-      this.setState({ focusedInput });
     }
+    this.setState({ focusedInput });
   }
   render() {
     const props = omit(this.props, [
