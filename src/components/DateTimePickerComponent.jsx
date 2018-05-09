@@ -44,7 +44,6 @@ const defaultProps = {
 
   // calendar presentation and interaction related props
   renderMonth: null,
-  displayFormat: 'DD/MM/YYYY HH:mm:ss',
   is24HourFormat: true,
   orientation: HORIZONTAL_ORIENTATION,
   anchorDirection: ANCHOR_RIGHT,
@@ -120,6 +119,7 @@ export default class DateTimePickerComponent extends React.Component {
       selected: { ...newDates },
     });
     onApply(newDates, oldDates);
+    this.onFocusChange(null);
   }
   onCancel() {
     const { selected: { startDate, endDate } } = this.state;
@@ -129,6 +129,7 @@ export default class DateTimePickerComponent extends React.Component {
       endDate,
     });
     onCanel({ startDate, endDate });
+    this.onFocusChange(null);
   }
   onDatesChange({ startDate, endDate }) {
     const { stateDateWrapper } = this.props;
