@@ -34,6 +34,7 @@ class TimeRangePicker extends React.Component {
           is24HourFormat={is24HourFormat}
           onTimeChange={this.props.onTimeChange}
           disableMinutes={disableMinutes}
+          hourProps={{tabIndex: 1}}
         />
         <TimePicker
           key="end"
@@ -42,6 +43,7 @@ class TimeRangePicker extends React.Component {
           is24HourFormat={is24HourFormat}
           onTimeChange={this.props.onTimeChange}
           disableMinutes={disableMinutes}
+          hourProps={{ tabIndex: 2 }}
         />
       </div>
     );

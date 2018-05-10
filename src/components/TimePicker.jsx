@@ -136,6 +136,7 @@ class TimePicker extends React.Component {
       styles,
       is24HourFormat,
       disableMinutes,
+      hourProps = {}
     } = this.props;
     return (
       <div
@@ -161,6 +162,7 @@ class TimePicker extends React.Component {
             onChange={e => this.onChange(e, 'hour')}
             onFocus={this.onFocus}
             onBlur={e => this.onBlur(e, 'hour')}
+            {...hourProps}
             {...css(styles.TimePicker_input)}
           />
           <button

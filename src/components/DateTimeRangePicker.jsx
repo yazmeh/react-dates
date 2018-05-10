@@ -530,6 +530,7 @@ class DateTimeRangePicker extends React.Component {
               <button
                 disabled={!startDate || !endDate}
                 onClick={() => onApply({ startDate, endDate })}
+                tabIndex={3}
                 {...css(styles.DateTimeRangePicker_Apply, styles.DateTimeRangePicker_ConfirmButton)}
               >OK
               </button>}
@@ -537,6 +538,7 @@ class DateTimeRangePicker extends React.Component {
               <button
                 disabled={!startDate || !endDate}
                 onClick={() => onApply({ startDate, endDate })}
+                tabIndex={4}
                 {...css(styles.DateTimeRangePicker_Cancel, styles.DateTimeRangePicker_ConfirmButton)}
               >Cancel
               </button>}
