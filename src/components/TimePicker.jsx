@@ -135,6 +135,7 @@ class TimePicker extends React.Component {
     const {
       styles,
       is24HourFormat,
+      disableMinutes,
     } = this.props;
     return (
       <div
@@ -175,30 +176,32 @@ class TimePicker extends React.Component {
           {...css(
                         styles.TimePicker_toggleContainer,
                         !is24HourFormat && styles.TimePicker_separator,
+                        disableMinutes && styles.TimePicker_isdisabled,
                         )}
         >
-          <button
+          {!disableMinutes && <button
             className="time-toogle increment min-toogle"
             onClick={() => this.onIncrement('minute')}
             {...css(styles.TimePicker_toggle)}
           >
             {/* &#9652; */}<ChevronUp />
-          </button>
+          </button>}
           <input
             type="text"
             value={minute.value}
             onFocus={this.onFocus}
+            readOnly={disableMinutes}
             onChange={e => this.onChange(e, 'minute')}
             onBlur={e => this.onBlur(e, 'minute')}
-            {...css(styles.TimePicker_input)}
+            {...css(styles.TimePicker_input, disableMinutes && styles.TimePicker_inputIsDisabled)}
           />
-          <button
+          {!disableMinutes && <button
             className="time-toogle decrement min-toogle"
             onClick={() => this.onDecrement('minute')}
             {...css(styles.TimePicker_toggle)}
           >
             {/* &#9662; */}<ChevronDown />
-          </button>
+          </button>}
         </div>
         {!is24HourFormat && <div
           className="mediterian"
@@ -235,6 +238,9 @@ export default withStyles((props) => {
       height: '100%',
       padding: '0 25px',
       position: 'relative',
+    },
+    TimePicker_isdisabled:{
+      padding:'30px 25px',
     },
     TimePicker_separator: {
       '::after': {
@@ -281,6 +287,9 @@ export default withStyles((props) => {
       textAlign: 'center',
       margin: 'auto',
     },
-
+    TimePicker_inputIsDisabled:{
+      pointerEvents:'none',
+      cursor:'not-allowed'
+    }
   };
 })(TimePicker);

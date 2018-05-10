@@ -179,7 +179,20 @@ class DateTimeRangePicker extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     return shallowCompare(this, nextProps, nextState);
   }
-
+  componentWillReceiveProps(newProps){
+    const {
+      startDate,
+      endDate
+    } = newProps
+    if (!startDate.isSame(this.state.selected.startDate) || !endDate.isSame(this.state.selected.endDate)) {
+      this.setState({
+        selected: {
+          startDate,
+          endDate
+        }
+      });
+    }
+  }
   componentDidUpdate(prevProps) {
     if (!prevProps.focusedInput && this.props.focusedInput && this.isOpened()) {
       // The date picker just changed from being closed to being open.
@@ -382,6 +395,7 @@ class DateTimeRangePicker extends React.Component {
       withPortal,
       withFullScreenPortal,
       daySize,
+      disableMinutes,
       enableOutsideDays,
       focusedInput,
       is24HourFormat,
@@ -468,6 +482,7 @@ class DateTimeRangePicker extends React.Component {
             />
             <DayTimePickerRangeController
               orientation={orientation}
+              disableMinutes={disableMinutes}
               enableOutsideDays={enableOutsideDays}
               numberOfMonths={numberOfMonths}
               onPrevMonthClick={onPrevMonthClick}
@@ -508,6 +523,7 @@ class DateTimeRangePicker extends React.Component {
               transitionDuration={transitionDuration}
               disabled={disabled}
             />
+          </div>
             {!!(onApply || onCancel) &&
             <div {...css(styles.DateTimeRangePicker_ConfirmWrapper)}>
               {!!onApply &&
@@ -535,7 +551,6 @@ class DateTimeRangePicker extends React.Component {
               {closeIcon}
             </button>
                     )}
-          </div>
         </div>
       </div>
     );

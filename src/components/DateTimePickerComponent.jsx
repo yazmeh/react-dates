@@ -62,6 +62,7 @@ const defaultProps = {
   onPrevMonthClick() { },
   onNextMonthClick() { },
   onClose() { },
+  disableMinutes:true,
 
   // day presentation and interaction related props
   renderCalendarDay: undefined,
@@ -107,6 +108,22 @@ export default class DateTimePickerComponent extends React.Component {
     this.onFocusChange = this.onFocusChange.bind(this);
     this.onApply = this.onApply.bind(this);
     this.onCancel = this.onCancel.bind(this);
+  }
+  componentWillReceiveProps(newProps){
+    const {
+      startDate,
+      endDate
+    } =newProps
+    if (!startDate.isSame(this.state.selected.startDate) || !endDate.isSame(this.state.selected.endDate)){
+      this.setState({
+        selected:{
+          startDate,
+          endDate
+        },
+        startDate,
+        endDate,
+      });
+    }
   }
   onApply(newDates) {
     const { onApply } = this.props;

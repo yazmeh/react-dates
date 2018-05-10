@@ -618,6 +618,9 @@
   padding: 0 25px;
   position: relative
 }
+.TimePicker_isdisabled {
+  padding: 30px 25px
+}
 .TimePicker_separator::after {
   content: ':';
   position: absolute;
@@ -662,6 +665,10 @@
   border: 1px solid #d5d7dd;
   text-align: center;
   margin: auto
+}
+.TimePicker_inputIsDisabled {
+  pointer-events: none;
+  cursor: not-allowed
 }
 .CalendarDay {
   -moz-box-sizing: border-box;
@@ -1056,6 +1063,7 @@
 }
 .DateRangeDisplay_arrow_svg {
   vertical-align: middle;
+  margin-top: -3px;
   fill: #565a5c;
   height: 24px;
   width: 24px

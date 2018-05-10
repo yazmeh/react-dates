@@ -84,6 +84,7 @@ const propTypes = forbidExtraProps({
   startTime: PropTypes.object,
   endTime: PropTypes.object,
   onTimeChange: PropTypes.func,
+  disableMinutes:PropTypes.bool,
 
   // day props
   modifiers: PropTypes.object,
@@ -759,6 +760,7 @@ class DayTimePicker extends React.Component {
       startTime,
       endTime,
       hideKeyboardShortcutsPanel,
+      disableMinutes,
       onOutsideClick,
       monthFormat,
       daySize,
@@ -938,6 +940,7 @@ class DayTimePicker extends React.Component {
                   startTime={startTime}
                   endTime={endTime}
                   onTimeChange={onTimeChange}
+                  disableMinutes={disableMinutes}
                 />
               </div>
 

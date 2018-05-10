@@ -60,7 +60,8 @@ const propTypes = forbidExtraProps({
 
   // Timepicker props
   is24HourFormat: PropTypes.bool,
-
+  disableMinutes:PropTypes.bool,
+  
   // DayTimePicker props
   renderMonth: PropTypes.func,
   enableOutsideDays: PropTypes.bool,
@@ -307,7 +308,7 @@ export default class DayTimePickerRangeController extends React.Component {
     }
 
     let modifiers = {};
-
+    
     if (didStartDateChange) {
       modifiers = this.deleteModifier(modifiers, prevStartDate, 'selected-start');
       modifiers = this.addModifier(modifiers, startDate, 'selected-start');
@@ -422,7 +423,6 @@ export default class DayTimePickerRangeController extends React.Component {
       modifiers = this.addModifier(modifiers, today, 'today');
       this.today = today;
     }
-
     if (Object.keys(modifiers).length > 0) {
       this.setState({
         visibleDays: {
@@ -435,7 +435,6 @@ export default class DayTimePickerRangeController extends React.Component {
     if (didFocusChange || phrases !== prevPhrases) {
       // set the appropriate CalendarDay phrase based on focusedInput
       const chooseAvailableDate = getChooseAvailableDatePhrase(phrases, focusedInput);
-
       this.setState({
         phrases: {
           ...phrases,
@@ -1036,6 +1035,7 @@ export default class DayTimePickerRangeController extends React.Component {
       dayAriaLabelFormat,
       verticalHeight,
       noBorder,
+      disableMinutes,
       transitionDuration,
       verticalBorderSpacing,
     } = this.props;
@@ -1046,6 +1046,7 @@ export default class DayTimePickerRangeController extends React.Component {
       <div>
         <DayTimePicker
           ref={this.setDayPickerRef}
+          disableMinutes={disableMinutes}
           orientation={orientation}
           enableOutsideDays={enableOutsideDays}
           modifiers={visibleDays}

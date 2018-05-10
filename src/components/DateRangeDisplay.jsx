@@ -77,7 +77,6 @@ export default withStyles(({ reactDates: { color, sizing } }) => ({
     lineHeight: '30px',
     textAlign: 'center',
     borderRadius: '50%',
-    marginTop:'-5px',   
     backgroundColor: '#ECECEC',
     position: 'absolute',
     top: 'calc(50% - 15px)',
@@ -85,6 +84,7 @@ export default withStyles(({ reactDates: { color, sizing } }) => ({
   },
   DateRangeDisplay_arrow_svg: {
     verticalAlign: 'middle',
+    marginTop: '-3px',       
     fill: color.text,
     height: sizing.arrowWidth,
     width: sizing.arrowWidth,
