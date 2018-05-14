@@ -82,7 +82,10 @@ export default withStyles(({
      width:'50%',
      boxContent:'border-box',
      padding: '20px 20px',
-     borderBottom:'2px solid tranparent'
+     borderBottom:'2px solid tranparent',
+     ':hover':{
+       borderBottom: '2px solid #EAEAEA'
+     }
    },
   DateDisplay_alignLeft:{
     float: 'left'
@@ -92,6 +95,9 @@ export default withStyles(({
   },
   DateDisplay_isFocused:{
     borderBottom:`2px solid ${color.selected.backgroundColor}`,
+    ':hover':{
+      borderBottom: `2px solid ${color.selected.backgroundColor}`,
+    }
   },
   DateDisplay_Day: {
     display: 'inline-block',

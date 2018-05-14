@@ -1006,13 +1006,17 @@
   padding: 20px;
   border-bottom: 2px solid tranparent
 }
+.DateDisplay:hover {
+  border-bottom: 2px solid #eaeaea
+}
 .DateDisplay_alignLeft {
   float: left
 }
 .DateDisplay_alignRight {
   float: right
 }
-.DateDisplay_isFocused {
+.DateDisplay_isFocused,
+.DateDisplay_isFocused:hover {
   border-bottom: 2px solid #00a699
 }
 .DateDisplay_Day {
@@ -1081,6 +1085,9 @@
   position: relative;
   border: 1px solid #e4e6ed;
   border-radius: 5px
+}
+.SingleDateRange:hover {
+  border: 1px solid #878787
 }
 .SingleDateRange_small {
   height: 18px;

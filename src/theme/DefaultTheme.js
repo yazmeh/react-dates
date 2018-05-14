@@ -30,6 +30,7 @@ export default {
     border: {
       input: {
         border: '1px solid #E4E6ED',
+        borderHover: '1px solid #878787',
         borderTop: 0,
         borderRight: 0,
         borderBottom: '2px solid transparent',

@@ -78,7 +78,10 @@ export default withStyles(({
     boxSizing: 'content-box',
     position: 'relative',
     border: border.input.border,
-    borderRadius: '5px',
+    borderRadius: '5px',  
+    ':hover':{
+      border:border.input.borderHover,
+    }
   },
   SingleDateRange_small: {
     height: font.input.lineHeight_small,
