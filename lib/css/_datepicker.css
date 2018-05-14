@@ -1004,7 +1004,7 @@
   width: 50%;
   box-content: border-box;
   padding: 20px;
-  border-bottom: 2px solid tranparent
+  border-bottom: 2px solid
 }
 .DateDisplay:hover {
   border-bottom: 2px solid #eaeaea

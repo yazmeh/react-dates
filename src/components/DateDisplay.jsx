@@ -82,7 +82,7 @@ export default withStyles(({
      width:'50%',
      boxContent:'border-box',
      padding: '20px 20px',
-     borderBottom:'2px solid tranparent',
+     borderBottom:'2px solid #fff0',
      ':hover':{
        borderBottom: '2px solid #EAEAEA'
      }
