@@ -758,7 +758,7 @@
 .CalendarDay__blocked_calendar:active,
 .CalendarDay__blocked_calendar:hover {
   background: #cacccd;
-  border: 1px solid #cacccd;
+  border: 1px solid;
   color: #82888a
 }
 .CalendarDay__blocked_out_of_range,
