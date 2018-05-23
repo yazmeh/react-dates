@@ -141,7 +141,11 @@ export default class DateTimePickerComponent extends React.Component {
   onCancel() {
     const { selected: { startDate, endDate } } = this.state;
     const { onCancel } = this.props;
-    if (onCancel){
+    this.setState({
+      startDate,
+      endDate,
+    });
+    if(onCancel){
       onCancel({ startDate, endDate });
     }
     this.onFocusChange(null);
