@@ -59,7 +59,7 @@ class TimePicker extends React.Component {
         if (input < 10) {
           input = `0${input}`;
         }
-        state[type].value = input;
+        state[type].value = `${input}`;
         this.setState(state);
       }
     }
