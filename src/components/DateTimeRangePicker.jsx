@@ -480,21 +480,13 @@ class DateTimeRangePicker extends React.Component {
           >
         <div {...css(styles.DateTimeRangePicker_pickerWrapper)}>
           <div {...css(styles.DateTimeRangePicker_pickerWrapperInner)}>
-            <DateRangeDisplayController
-              startDate={selected.startDate}
-              startDateId={startDateId}
-              isStartDateFocused={focusedInput === START_DATE}
-              endDate={selected.endDate}
-              endDateId={endDateId}
-              isEndDateFocused={focusedInput === END_DATE}
-              onFocusChange={onFocusChange}
-              isFocused={isDateRangePickerInputFocused}
-            />
+            
             <DayTimePickerRangeController
               orientation={orientation}
               disableMinutes={disableMinutes}
               enableOutsideDays={enableOutsideDays}
               numberOfMonths={numberOfMonths}
+              displayRangeProp={displayRangeProp}
               onPrevMonthClick={onPrevMonthClick}
               onNextMonthClick={onNextMonthClick}
               onDatesChange={this.dateChange}

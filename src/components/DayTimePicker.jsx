@@ -29,6 +29,7 @@ import ScrollableOrientationShape from '../shapes/ScrollableOrientationShape';
 import DayOfWeekShape from '../shapes/DayOfWeekShape';
 import CalendarInfoPositionShape from '../shapes/CalendarInfoPositionShape';
 import TimeRangePicker from './TimeRangePicker';
+import DateRangeDisplayController from "./DateRangeDisplayController";
 
 import {
   HORIZONTAL_ORIENTATION,
@@ -68,6 +69,7 @@ const propTypes = forbidExtraProps({
   noBorder: PropTypes.bool,
   transitionDuration: nonNegativeInteger,
   verticalBorderSpacing: nonNegativeInteger,
+  displayRangeProp:PropTypes.object,
 
   // navigation props
   navPrev: PropTypes.node,
@@ -759,6 +761,7 @@ class DayTimePicker extends React.Component {
       is24HourFormat,
       startTime,
       endTime,
+      displayRangeProp,
       hideKeyboardShortcutsPanel,
       disableMinutes,
       onOutsideClick,
@@ -871,7 +874,16 @@ class DayTimePicker extends React.Component {
                             calendarInfoIsInline && isHorizontal && styles.DayTimePicker_wrapper__horizontal,
                         )}
           >
-
+            <DateRangeDisplayController
+              startDate={displayRangeProp.startDate}
+              startDateId={displayRangeProp.startDateId}
+              isStartDateFocused={displayRangeProp.isStartDateFocused}
+              endDate={displayRangeProp.endDate}
+              endDateId={displayRangeProp.endDateId}
+              isEndDateFocused={displayRangeProp.isEndDateFocused}
+              onFocusChange={displayRangeProp.onFocusChange}
+              isFocused={displayRangeProp.isFocused}
+            />
             <div
               {...css(
                                 styles.DayTimePicker_weekHeaders,

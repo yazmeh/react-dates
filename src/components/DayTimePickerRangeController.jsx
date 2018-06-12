@@ -47,6 +47,7 @@ const propTypes = forbidExtraProps({
   startDateOffset: PropTypes.func,
   endDateOffset: PropTypes.func,
 
+  displayRangeProp:PropTypes.object,
   focusedInput: FocusedInputShape,
   onFocusChange: PropTypes.func,
   onClose: PropTypes.func,
@@ -113,6 +114,7 @@ const defaultProps = {
   onFocusChange() { },
   onClose() { },
 
+  displayRangeProp:{},
   keepOpenOnDateSelect: false,
   minimumNights: 1,
   disabled: false,
@@ -1030,6 +1032,7 @@ export default class DayTimePickerRangeController extends React.Component {
       focusedInput,
       renderCalendarDay,
       renderDayContents,
+      displayRangeProp,
       renderCalendarInfo,
       calendarInfoPosition,
       onBlur,
@@ -1064,6 +1067,7 @@ export default class DayTimePickerRangeController extends React.Component {
           onPrevMonthClick={this.onPrevMonthClick}
           onNextMonthClick={this.onNextMonthClick}
           onTimeChange={this.onTimeChange}
+          displayRangeProp={displayRangeProp}
           onMultiplyScrollableMonths={this.onMultiplyScrollableMonths}
           monthFormat={monthFormat}
           renderMonth={renderMonth}

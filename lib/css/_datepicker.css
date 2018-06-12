@@ -903,6 +903,83 @@
   width: 42px;
   fill: #565a5c
 }
+.DateDisplay {
+  display: inline-block;
+  width: 50%;
+  box-content: border-box;
+  padding: 20px;
+  border-bottom: 2px solid #fff
+}
+.DateDisplay:hover {
+  border-bottom: 2px solid #eaeaea
+}
+.DateDisplay_alignLeft {
+  float: left
+}
+.DateDisplay_alignRight {
+  float: right
+}
+.DateDisplay_isFocused,
+.DateDisplay_isFocused:hover {
+  border-bottom: 2px solid #00a699
+}
+.DateDisplay_Day {
+  display: inline-block;
+  font-size: 25px;
+  padding: 0 5px;
+  text-align: center;
+  font-weight: 700;
+  vertical-align: middle;
+  color: #565a5c
+}
+.DateDisplay_MonthYearDowWrapper {
+  display: inline-block;
+  vertical-align: middle;
+  color: #565a5c
+}
+.DateDisplay_MonthYear {
+  font-size: 13px;
+  font-weight: 700
+}
+.DateDisplay_DOW {
+  font-size: 12px
+}
+.DateRangeDisplay {
+  position: relative;
+  width: 100%;
+  box-content: border-box;
+  height: 72px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.12)
+}
+.DateRangeDisplay_arrow {
+  display: inline-block;
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  margin-top: -5px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #ececec;
+  position: absolute;
+  top: -webkit-calc(50% - 15px);
+  top: -moz-calc(50% - 15px);
+  top: calc(50% - 15px);
+  left: -webkit-calc(50% - 15px);
+  left: -moz-calc(50% - 15px);
+  left: calc(50% - 15px)
+}
+.DateRangeDisplay_arrow_svg {
+  vertical-align: middle;
+  margin-top: -3px;
+  fill: #565a5c;
+  height: 24px;
+  width: 24px
+}
+.DateRangeDisplay_arrow_svg__small {
+  height: 19px;
+  width: 19px
+}
 .DayTimePicker {
   background: #fff;
   position: relative;
@@ -998,83 +1075,6 @@
   right: 0;
   left: 0;
   overflow-y: scroll
-}
-.DateDisplay {
-  display: inline-block;
-  width: 50%;
-  box-content: border-box;
-  padding: 20px;
-  border-bottom: 2px solid #fff
-}
-.DateDisplay:hover {
-  border-bottom: 2px solid #eaeaea
-}
-.DateDisplay_alignLeft {
-  float: left
-}
-.DateDisplay_alignRight {
-  float: right
-}
-.DateDisplay_isFocused,
-.DateDisplay_isFocused:hover {
-  border-bottom: 2px solid #00a699
-}
-.DateDisplay_Day {
-  display: inline-block;
-  font-size: 25px;
-  padding: 0 5px;
-  text-align: center;
-  font-weight: 700;
-  vertical-align: middle;
-  color: #565a5c
-}
-.DateDisplay_MonthYearDowWrapper {
-  display: inline-block;
-  vertical-align: middle;
-  color: #565a5c
-}
-.DateDisplay_MonthYear {
-  font-size: 13px;
-  font-weight: 700
-}
-.DateDisplay_DOW {
-  font-size: 12px
-}
-.DateRangeDisplay {
-  position: relative;
-  width: 100%;
-  box-content: border-box;
-  height: 72px;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,.12)
-}
-.DateRangeDisplay_arrow {
-  display: inline-block;
-  vertical-align: middle;
-  width: 30px;
-  height: 30px;
-  margin-top: -5px;
-  line-height: 30px;
-  text-align: center;
-  border-radius: 50%;
-  background-color: #ececec;
-  position: absolute;
-  top: -webkit-calc(50% - 15px);
-  top: -moz-calc(50% - 15px);
-  top: calc(50% - 15px);
-  left: -webkit-calc(50% - 15px);
-  left: -moz-calc(50% - 15px);
-  left: calc(50% - 15px)
-}
-.DateRangeDisplay_arrow_svg {
-  vertical-align: middle;
-  margin-top: -3px;
-  fill: #565a5c;
-  height: 24px;
-  width: 24px
-}
-.DateRangeDisplay_arrow_svg__small {
-  height: 19px;
-  width: 19px
 }
 .SingleDateRange {
   display: inline-block;
