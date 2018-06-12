@@ -8,6 +8,8 @@ import omit from 'lodash/omit';
 import { DateRangePickerPhrases } from '../defaultPhrases';
 import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, ANCHOR_RIGHT } from '../constants';
 import isInclusivelyAfterDay from '../utils/isInclusivelyAfterDay';
+import isSameDay from '../utils/isSameDay';
+
 
 const propTypes = {
   ...omit(DateRangePickerShape, [
