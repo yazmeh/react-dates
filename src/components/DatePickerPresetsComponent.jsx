@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import DateRangePicker from './DateRangePicker';
 import DateRangePickerShape from '../shapes/DateRangePickerShape';
 import omit from 'lodash/omit';
+import { css, withStyles, withStylesPropTypes } from 'react-with-styles';
 import { DateRangePickerPhrases } from '../defaultPhrases';
 import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, ANCHOR_RIGHT } from '../constants';
 import isInclusivelyAfterDay from '../utils/isInclusivelyAfterDay';
-
+import isSameDay from '../utils/isSameDay';
 const propTypes = {
   ...omit(DateRangePickerShape, [
     'startDate',
@@ -16,6 +17,10 @@ const propTypes = {
     'focusedInput',
     'onFocusChange',
   ]),
+  ...withStylesPropTypes,
+  onApply:PropTypes.func,
+  onCancel:PropTypes.func,
+  presetOptions:PropTypes.array
 };
 const today = moment().hour(12);
 const defaultProps = {
@@ -41,6 +46,10 @@ const defaultProps = {
   block: false,
   small: false,
   regular: false,
+
+  //Wrappers Props
+  onApply:()=>{},
+  onCancel:()=>{},
 
   // calendar presentation and interaction related props
   renderMonth: null,
@@ -79,7 +88,7 @@ const defaultProps = {
 
   stateDateWrapper: date => date,
 };
-export default class DatePickerComponent extends React.Component {
+class DatePickerPresetsComponent extends React.Component {
   constructor(props) {
     super(props);
     const {
@@ -95,9 +104,10 @@ export default class DatePickerComponent extends React.Component {
       focusedInput = END_DATE;
     }
     this.state = {
-      focusedInput,
+      focusedInput, 
       startDate,
       endDate,
+      initialVisibleMonth:(startDate||moment()).month - 1,
       selected: {
         startDate,
         endDate,
@@ -105,6 +115,7 @@ export default class DatePickerComponent extends React.Component {
     };
     this.onDatesChange = this.onDatesChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
+    this.generatePresetOption = this.generatePresetOption.bind(this);
     this.onApply = this.onApply.bind(this);
     this.onCancel = this.onCancel.bind(this);
   }
@@ -156,6 +167,30 @@ export default class DatePickerComponent extends React.Component {
       endDate: endDate && stateDateWrapper(endDate),
     });
   }
+  generatePresetOption(){
+    const {styles,presetOptions} =  this.props;
+    const {startDate,endDate} = this.state;
+    return (
+      <div {...css(styles.PresetOptionMenu)}>
+        {presetOptions.map(({text,start,end})=>{
+          const isSelected = isSameDay(start, startDate) && isSameDay(end, endDate);
+          return (
+            <button 
+              key={text}
+              {...css(
+                styles.PresetOptionMenu_item,
+                isSelected && styles.PresetOptionMenu_item_selected,
+              )}
+              type="button"
+              onClick={() => this.onDatesChange({ startDate: start, endDate: end })}
+              >
+              {text}
+            </button>
+          );
+       })}
+      </div>
+    )
+  }
   onFocusChange(focusedInput) {
     const {
       selected,
@@ -184,27 +219,68 @@ export default class DatePickerComponent extends React.Component {
       'selected',
       'startDate',
       'endDate',
+      'presetOptions',
     ]);
     const {
       startDate,
       endDate,
       focusedInput,
       selected,
+      initialVisibleMonth,
     } = this.state;
+    const {
+      presetOptions
+    } = this.props
     return (
       <div>
         <DateRangePicker
           {...props}
+          initialVisibleMonth={()=>((startDate||moment()).subtract(1,"month"))}
+          calendarInfoPosition="after"
           onDatesChange={this.onDatesChange}
           onFocusChange={this.onFocusChange}
           focusedInput={focusedInput}
           startDate={startDate}
           verticalSpacing={10}
           endDate={endDate}
+          renderCalendarInfo={this.generatePresetOption}
         />
       </div>
     );
   }
 }
-DatePickerComponent.propTypes = propTypes;
-DatePickerComponent.defaultProps = defaultProps;
+
+DatePickerPresetsComponent.propTypes = propTypes;
+DatePickerPresetsComponent.defaultProps = defaultProps;
+export { DatePickerPresetsComponent as PurePresetsComponent};
+export default withStyles(({ reactDates: { color } })=>(
+  {
+    PresetOptionMenu:{
+      // position:"absolute",
+      // width:300,
+      // top:0 ,
+      // left:-300, 
+      // boxShadow: '0 2px 6px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.07)',
+      // backgroundColor:color.background,
+      height:'100%'
+    },
+    PresetOptionMenu_item:{
+      position:"relative",  
+      display:"block",
+      width:300,
+
+      padding:"10px 0",
+      ':focus':{
+        outline:0
+      },
+      ':hover':{
+        backgroundColor:color.core.primary,
+        color:color.background,
+      }
+    },
+    PresetOptionMenu_item_selected:{
+      backgroundColor:color.core.primary,
+      color:color.background,  
+    },
+  }
+))(DatePickerPresetsComponent);

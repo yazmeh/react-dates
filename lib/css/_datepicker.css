@@ -1216,3 +1216,20 @@
   background-color: #b3bacf;
   cursor: not-allowed
 }
+.PresetOptionMenu {
+  height: 100%
+}
+.PresetOptionMenu_item {
+  position: relative;
+  display: block;
+  width: 300px;
+  padding: 10px 0
+}
+.PresetOptionMenu_item:focus {
+  outline: 0
+}
+.PresetOptionMenu_item:hover,
+.PresetOptionMenu_item_selected {
+  background-color: #00a699;
+  color: #fff
+}

@@ -3,6 +3,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import DateTimeRangePicker from './DateTimeRangePicker';
 import DateRangePickerShape from '../shapes/DateRangePickerShape';
+import { css, withStyles, withStylesPropTypes } from 'react-with-styles';
 import omit from 'lodash/omit';
 import { DateRangePickerPhrases } from '../defaultPhrases';
 import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, ANCHOR_RIGHT } from '../constants';
@@ -16,6 +17,8 @@ const propTypes = {
     'focusedInput',
     'onFocusChange',
   ]),
+  ...withStylesPropTypes,
+  presetOptions: PropTypes.array
 };
 const today = moment().hour(12);
 const defaultProps = {
@@ -80,7 +83,7 @@ const defaultProps = {
 
   stateDateWrapper: date => date,
 };
-export default class DateTimePickerComponent extends React.Component {
+class DateTimePickerComponent extends React.Component {
   constructor(props) {
     super(props);
     const {
@@ -106,6 +109,7 @@ export default class DateTimePickerComponent extends React.Component {
     };
     this.onDatesChange = this.onDatesChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
+    this.generatePresetOption = this.generatePresetOption.bind(this);
     this.onApply = this.onApply.bind(this);
     this.onCancel = this.onCancel.bind(this);
   }
@@ -123,6 +127,32 @@ export default class DateTimePickerComponent extends React.Component {
         startDate,
         endDate,
       });
+    }
+  }
+  generatePresetOption() {
+    const { styles, presetOptions } = this.props;
+    const { startDate, endDate } = this.state;
+    if (presetOptions){
+      return (
+        <div {...css(styles.PresetOptionMenu)}>
+          {presetOptions.map(({ text, start, end }) => {
+            const isSelected = isSameDay(start, startDate) && isSameDay(end, endDate);
+            return (
+              <button
+                key={text}
+                {...css(
+                  styles.PresetOptionMenu_item,
+                  isSelected && styles.PresetOptionMenu_item_selected,
+                )}
+                type="button"
+                onClick={() => this.onDatesChange({ startDate: start, endDate: end })}
+              >
+                {text}
+              </button>
+            );
+          })}
+        </div>
+      )
     }
   }
   onApply(newDates) {
@@ -185,6 +215,7 @@ export default class DateTimePickerComponent extends React.Component {
       'selected',
       'startDate',
       'endDate',
+      'presetOptions',
     ]);
     const {
       startDate,
@@ -205,6 +236,8 @@ export default class DateTimePickerComponent extends React.Component {
           onCancel={this.onCancel}
           verticalSpacing={10}
           endDate={endDate}
+          calendarInfoPosition="after"
+          renderCalendarInfo={this.generatePresetOption}
         />
       </div>
     );
@@ -212,3 +245,29 @@ export default class DateTimePickerComponent extends React.Component {
 }
 DateTimePickerComponent.propTypes = propTypes;
 DateTimePickerComponent.defaultProps = defaultProps;
+export { DateTimePickerComponent as PureDateTimePickerComponent}
+export default withStyles(({ reactDates: { color } }) => (
+  {
+    PresetOptionMenu: {
+      height: '100%'
+    },
+    PresetOptionMenu_item: {
+      position: "relative",
+      display: "block",
+      width: 300,
+
+      padding: "10px 0",
+      ':focus': {
+        outline: 0
+      },
+      ':hover': {
+        backgroundColor: color.core.primary,
+        color: color.background,
+      }
+    },
+    PresetOptionMenu_item_selected: {
+      backgroundColor: color.core.primary,
+      color: color.background,
+    },
+  }
+))(DateTimePickerComponent);
