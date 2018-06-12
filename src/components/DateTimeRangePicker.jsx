@@ -444,6 +444,16 @@ class DateTimeRangePicker extends React.Component {
     const inputHeight = getInputHeight(reactDates, small);
 
     const withAnyPortal = withPortal || withFullScreenPortal;
+    const displayRangeProp={
+      startDate:selected.startDate,
+      startDateId:startDateId,
+      isStartDateFocused:(focusedInput === START_DATE ),
+      endDate: selected.endDate, 
+      endDateId:endDateId,
+      isEndDateFocused:(focusedInput === END_DATE) ,
+      onFocusChange:onFocusChange,
+      isFocused: isDateRangePickerInputFocused 
+    }
 
     return (
 

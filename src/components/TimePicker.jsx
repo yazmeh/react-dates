@@ -45,6 +45,33 @@ class TimePicker extends React.Component {
     this.onDecrement = this.onDecrement.bind(this);
     this.toogleMeridiem = this.toogleMeridiem.bind(this);
   }
+  componentWillReceiveProps(nextProps){
+    const {
+      time:prevTime
+    } = this.props;
+    const {
+      time,
+      is24HourFormat
+    } = nextProps;
+    this.setState({
+      hour: {
+        min: is24HourFormat ? 0 : 1,
+        max: is24HourFormat ? 23 : 12,
+        format: is24HourFormat ? 'HH' : 'hh',
+        value: time.format(is24HourFormat ? 'HH' : 'hh'),
+      },
+      minute: {
+        min: 0,
+        max: 59,
+        format: 'mm',
+        value: time.format('mm'),
+      },
+      meridiem: {
+        format: 'a',
+        value: time.format('a'),
+      }
+    })
+  }
   onChange(e, type) {
     const state = { ...this.state };
     let input = e.target.value;

@@ -312,7 +312,6 @@ export default class DayTimePickerRangeController extends React.Component {
     if (didStartDateChange) {
       modifiers = this.deleteModifier(modifiers, prevStartDate, 'selected-start');
       modifiers = this.addModifier(modifiers, startDate, 'selected-start');
-
       if (prevStartDate) {
         const startSpan = prevStartDate.clone().add(1, 'day');
         const endSpan = prevStartDate.clone().add(prevMinimumNights + 1, 'days');
@@ -441,6 +440,12 @@ export default class DayTimePickerRangeController extends React.Component {
           chooseAvailableDate,
         },
       });
+    }
+    if (didStartDateChange || didEndDateChange){
+      this.setState({
+        startTime: (Boolean(startDate) && startDate) || moment('12:00', 'hh:mm'),
+        endTime: (Boolean(endDate) && endDate) || moment('12:00', 'hh:mm')
+      })
     }
   }
 
