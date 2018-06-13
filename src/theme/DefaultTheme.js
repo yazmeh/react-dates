@@ -181,7 +181,7 @@ export default {
       arrowWidth: 24,
       arrowWidth_small: 19,
       confirmButtonMinWidth: 175,
-      confirmButtonHeight: 25,
+      confirmButtonHeight: 30,
       confirmButtonPadding: {
         vertical: 3,
         horizontal: 0,

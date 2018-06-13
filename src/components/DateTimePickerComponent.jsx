@@ -292,7 +292,7 @@ export default withStyles(({ reactDates: { color, sizing } }) => (
       display: "block",
       width: 200,
 
-      padding: "10px 0",
+      padding: "5px 0",
       ':focus': {
         outline: 0
       },
@@ -335,7 +335,7 @@ export default withStyles(({ reactDates: { color, sizing } }) => (
       },
     },
     DateTimePickerComponent_ConfirmButton_Wrapper:{
-      padding:'5px 0',
+      paddingTop:'10px',
       margin:'0 auto',
     },
     DateTimePickerComponent_menu:{

@@ -636,7 +636,7 @@ export default withStyles(({ reactDates: { color, zIndex, sizing } }) => ({
     display: 'block',
   },
   DateTimeRangePicker_pickerWrapper:{
-    padding:'10px',
+    //padding:'10px',
     boxShadow: '0 2px 19px 0 rgba(0,0,0,0.13)'
   },
   DateTimeRangePicker_pickerWrapperInner: {
