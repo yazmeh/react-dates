@@ -65,6 +65,7 @@ export default withStyles(({ reactDates: { color, sizing } }) => ({
     position: 'relative',
     width: '100%',
     boxContent: 'border-box',
+    zIndex:10,
     height: '72px',
     boxShadow: '0 2px 4px 0 rgba(0,0,0,0.12)',
   },

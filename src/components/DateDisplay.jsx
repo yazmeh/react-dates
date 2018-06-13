@@ -80,7 +80,8 @@ export default withStyles(({
    DateDisplay:{
      display:'inline-block',
      width:'50%',
-     boxContent:'border-box',
+     height:'100%',
+     boxSizing:'border-box',
      padding: '20px 20px',
      borderBottom:'2px solid #ffffff',
      ':hover':{

@@ -592,6 +592,9 @@
   width: 15px;
   fill: #cacccd
 }
+.PresetOptionMenu {
+  height: 100%
+}
 .TimePicker {
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -906,7 +909,9 @@
 .DateDisplay {
   display: inline-block;
   width: 50%;
-  box-content: border-box;
+  height: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   padding: 20px;
   border-bottom: 2px solid #fff
 }
@@ -948,6 +953,7 @@
   position: relative;
   width: 100%;
   box-content: border-box;
+  z-index: 10;
   height: 72px;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.12)
 }
@@ -1190,9 +1196,9 @@
   padding: 10px
 }
 .DateTimeRangePicker_ConfirmButton {
-  padding: 6px 20px;
-  height: 30px;
-  min-width: 60px;
+  padding: 3px 0;
+  height: 25px;
+  min-width: 175px;
   border: 0;
   margin-right: 10px;
   font-weight: 800;
@@ -1216,13 +1222,16 @@
   background-color: #b3bacf;
   cursor: not-allowed
 }
-.PresetOptionMenu {
-  height: 100%
+.PresetOptionMenu_Wrapper {
+  width: 200px
 }
 .PresetOptionMenu_item {
   position: relative;
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid #e4e7e7;
   display: block;
-  width: 300px;
+  width: 200px;
   padding: 10px 0
 }
 .PresetOptionMenu_item:focus {
@@ -1232,4 +1241,43 @@
 .PresetOptionMenu_item_selected {
   background-color: #00a699;
   color: #fff
+}
+.DateTimePickerComponent_ConfirmButton {
+  padding: 3px 0;
+  height: 25px;
+  width: 175px;
+  border: 0;
+  margin: 0 auto;
+  font-weight: 800;
+  text-align: center;
+  display: block;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-size: 12px
+}
+.DateTimePickerComponent_Apply {
+  background-color: #ec5959;
+  color: #fff
+}
+.DateTimePickerComponent_Apply:disabled {
+  background-color: #f28d8d;
+  cursor: not-allowed
+}
+.DateTimePickerComponent_Cancel {
+  background-color: #b3bacf;
+  color: #fff
+}
+.DateTimePickerComponent_Cancel:disabled {
+  background-color: #b3bacf;
+  cursor: not-allowed
+}
+.DateTimePickerComponent_ConfirmButton_Wrapper {
+  padding: 5px 0;
+  margin: 0 auto
+}
+.DateTimePickerComponent_menu {
+  border: 1px solid #e4e7e7;
+  position: absolute;
+  top: 0;
+  bottom: 0
 }

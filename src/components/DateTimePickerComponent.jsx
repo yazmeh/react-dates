@@ -49,7 +49,6 @@ const defaultProps = {
 
   // calendar presentation and interaction related props
   renderMonth: null,
-  is24HourFormat: true,
   orientation: HORIZONTAL_ORIENTATION,
   anchorDirection: ANCHOR_RIGHT,
   horizontalMargin: 0,
@@ -67,7 +66,12 @@ const defaultProps = {
   onPrevMonthClick() { },
   onNextMonthClick() { },
   onClose() { },
+
+  //time props
   disableMinutes:true,
+  is24HourFormat: true,
+  hideTime:false,
+
 
   // day presentation and interaction related props
   renderCalendarDay: undefined,
@@ -136,23 +140,50 @@ class DateTimePickerComponent extends React.Component {
     const { startDate, endDate } = this.state;
     if (presetOptions){
       return (
-        <div {...css(styles.PresetOptionMenu)}>
-          {presetOptions.map(({ text, start, end }) => {
-            const isSelected = isSameDay(start, startDate) && isSameDay(end, endDate);
-            return (
-              <button
-                key={text}
-                {...css(
-                  styles.PresetOptionMenu_item,
-                  isSelected && styles.PresetOptionMenu_item_selected,
-                )}
-                type="button"
-                onClick={() => this.onDatesChange({ startDate: start, endDate: end })}
-              >
-                {text}
-              </button>
-            );
-          })}
+        <div {...css(styles.PresetOptionMenu_Wrapper)}>
+          <div {...css(styles.DateTimePickerComponent_menu)}>
+            <div {...css(styles.PresetOptionMenu)}>
+              {presetOptions.map(({ text, start, end }) => {
+                const isSelected = isSameDay(start, startDate) && isSameDay(end, endDate);
+                return (
+                  <button
+                    key={text}
+                    {...css(
+                      styles.PresetOptionMenu_item,
+                      isSelected && styles.PresetOptionMenu_item_selected,
+                    )}
+                    type="button"
+                    onClick={() => this.onDatesChange({ startDate: start, endDate: end })}
+                  >
+                  {text}
+                  </button>
+                );
+              })}
+            </div>
+            {!!(this.onApply || this.onCancel) &&
+              <div {...css(styles.DateTimePickerComponent_ConfirmWrapper)}>
+                {!!this.onApply &&
+                <div {...css(styles.DateTimePickerComponent_ConfirmButton_Wrapper)}>
+                  <button
+                    disabled={!startDate || !endDate}
+                    onClick={() => this.onApply({ startDate, endDate })}
+                    tabIndex={3}
+                    {...css(styles.DateTimePickerComponent_Apply, styles.DateTimePickerComponent_ConfirmButton)}
+                  >Apply
+                  </button>
+                </div>}
+                {!!this.onCancel &&
+                  <div {...css(styles.DateTimePickerComponent_ConfirmButton_Wrapper)}>
+                  <button
+                    disabled={!startDate || !endDate}
+                    onClick={() => this.onCancel({ startDate, endDate })}
+                    tabIndex={4}
+                    {...css(styles.DateTimePickerComponent_Cancel, styles.DateTimePickerComponent_ConfirmButton)}
+                  >Cancel
+                  </button>
+              </div> }
+            </div>}
+        </div>
         </div>
       )
     }
@@ -248,15 +279,18 @@ class DateTimePickerComponent extends React.Component {
 DateTimePickerComponent.propTypes = propTypes;
 DateTimePickerComponent.defaultProps = defaultProps;
 export { DateTimePickerComponent as PureDateTimePickerComponent}
-export default withStyles(({ reactDates: { color } }) => (
+export default withStyles(({ reactDates: { color, sizing } }) => (
   {
-    PresetOptionMenu: {
-      height: '100%'
+    PresetOptionMenu_Wrapper: {
+      width:200
     },
     PresetOptionMenu_item: {
       position: "relative",
+      border:0,
+      outline:0,
+      borderBottom: `1px solid ${color.core.borderLight}`,
       display: "block",
-      width: 300,
+      width: 200,
 
       padding: "10px 0",
       ':focus': {
@@ -270,6 +304,48 @@ export default withStyles(({ reactDates: { color } }) => (
     PresetOptionMenu_item_selected: {
       backgroundColor: color.core.primary,
       color: color.background,
+    },
+    DateTimePickerComponent_ConfirmButton: {
+      padding: `${sizing.confirmButtonPadding.vertical}px ${sizing.confirmButtonPadding.horizontal}px`,
+      height: `${sizing.confirmButtonHeight}px`,
+      width: `${sizing.confirmButtonMinWidth}px`,
+      border: 0,
+      margin:'0 auto',
+      fontWeight: 800,
+      textAlign:'center',
+      display:'block',
+      borderRadius: '5px',
+      textTransform: 'uppercase',
+      fontSize: 12,
+    },
+    DateTimePickerComponent_Apply: {
+      backgroundColor: color.confirmButton.apply.background,
+      color: color.confirmButton.apply.text,
+      ':disabled': {
+        backgroundColor: color.confirmButton.apply.disabled,
+        cursor: 'not-allowed',
+      },
+    },
+    DateTimePickerComponent_Cancel: {
+      backgroundColor: color.confirmButton.cancel.background,
+      color: color.confirmButton.cancel.text,
+      ':disabled': {
+        backgroundColor: color.confirmButton.cancel.disabled,
+        cursor: 'not-allowed',
+      },
+    },
+    DateTimePickerComponent_ConfirmButton_Wrapper:{
+      padding:'5px 0',
+      margin:'0 auto',
+    },
+    DateTimePickerComponent_menu:{
+      border: `1px solid ${color.core.borderLight}`,
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+    },
+    DateTimeRangePicker_ConfirmWrapper: {
+
     },
   }
 ))(DateTimePickerComponent);

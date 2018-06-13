@@ -46,6 +46,7 @@ export default {
   regular: PropTypes.bool,
   keepFocusOnInput: PropTypes.bool,
   disableMinutes:PropTypes.bool,
+  hideTime: PropTypes.bool,
 
   // calendar presentation and interaction related props
   renderMonth: PropTypes.func,

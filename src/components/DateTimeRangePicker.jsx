@@ -70,6 +70,7 @@ const defaultProps = {
   regular: false,
   keepFocusOnInput: false,
   is24HourFormat: false,
+  hideTime:false,
   selected:{
     startDate:null,
     endDate:null
@@ -396,6 +397,7 @@ class DateTimeRangePicker extends React.Component {
       withFullScreenPortal,
       daySize,
       disableMinutes,
+      hideTime,
       enableOutsideDays,
       focusedInput,
       is24HourFormat,
@@ -484,6 +486,7 @@ class DateTimeRangePicker extends React.Component {
             <DayTimePickerRangeController
               orientation={orientation}
               disableMinutes={disableMinutes}
+              hideTime={hideTime}
               enableOutsideDays={enableOutsideDays}
               numberOfMonths={numberOfMonths}
               displayRangeProp={displayRangeProp}
@@ -526,25 +529,7 @@ class DateTimeRangePicker extends React.Component {
               disabled={disabled}
             />
           </div>
-            {!!(onApply || onCancel) &&
-            <div {...css(styles.DateTimeRangePicker_ConfirmWrapper)}>
-              {!!onApply &&
-              <button
-                disabled={!startDate || !endDate}
-                onClick={() => onApply({ startDate, endDate })}
-                tabIndex={3}
-                {...css(styles.DateTimeRangePicker_Apply, styles.DateTimeRangePicker_ConfirmButton)}
-              >OK
-              </button>}
-              {!!onCancel &&
-              <button
-                disabled={!startDate || !endDate}
-                onClick={() => onCancel({ startDate, endDate })}
-                tabIndex={4}
-                {...css(styles.DateTimeRangePicker_Cancel, styles.DateTimeRangePicker_ConfirmButton)}
-              >Cancel
-              </button>}
-            </div>}
+            
             {withFullScreenPortal && (
             <button
               {...css(styles.DateTimeRangePicker_closeButton)}

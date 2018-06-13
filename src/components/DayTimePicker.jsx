@@ -87,6 +87,7 @@ const propTypes = forbidExtraProps({
   endTime: PropTypes.object,
   onTimeChange: PropTypes.func,
   disableMinutes:PropTypes.bool,
+  hideTime: PropTypes.bool,
 
   // day props
   modifiers: PropTypes.object,
@@ -764,6 +765,7 @@ class DayTimePicker extends React.Component {
       displayRangeProp,
       hideKeyboardShortcutsPanel,
       disableMinutes,
+      hideTime,
       onOutsideClick,
       monthFormat,
       daySize,
@@ -875,14 +877,7 @@ class DayTimePicker extends React.Component {
                         )}
           >
             <DateRangeDisplayController
-              startDate={displayRangeProp.startDate}
-              startDateId={displayRangeProp.startDateId}
-              isStartDateFocused={displayRangeProp.isStartDateFocused}
-              endDate={displayRangeProp.endDate}
-              endDateId={displayRangeProp.endDateId}
-              isEndDateFocused={displayRangeProp.isEndDateFocused}
-              onFocusChange={displayRangeProp.onFocusChange}
-              isFocused={displayRangeProp.isFocused}
+              {...displayRangeProp}
             />
             <div
               {...css(
@@ -946,7 +941,7 @@ class DayTimePicker extends React.Component {
                 />
                 {verticalScrollable && this.renderNavigation()}
               </div>
-              <div>
+             {!hideTime && <div>
                 <TimeRangePicker
                   is24HourFormat={is24HourFormat}
                   startTime={startTime}
@@ -954,7 +949,7 @@ class DayTimePicker extends React.Component {
                   onTimeChange={onTimeChange}
                   disableMinutes={disableMinutes}
                 />
-              </div>
+              </div>}
 
               {!isTouch && !hideKeyboardShortcutsPanel &&
               <DayPickerKeyboardShortcuts

@@ -62,6 +62,7 @@ const propTypes = forbidExtraProps({
   // Timepicker props
   is24HourFormat: PropTypes.bool,
   disableMinutes:PropTypes.bool,
+  hideTime: PropTypes.bool,
   
   // DayTimePicker props
   renderMonth: PropTypes.func,
@@ -1036,6 +1037,7 @@ export default class DayTimePickerRangeController extends React.Component {
       renderCalendarInfo,
       calendarInfoPosition,
       onBlur,
+      hideTime,
       isFocused,
       showKeyboardShortcuts,
       isRTL,
@@ -1055,6 +1057,7 @@ export default class DayTimePickerRangeController extends React.Component {
         <DayTimePicker
           ref={this.setDayPickerRef}
           disableMinutes={disableMinutes}
+          hideTime={hideTime}
           orientation={orientation}
           enableOutsideDays={enableOutsideDays}
           modifiers={visibleDays}

@@ -180,11 +180,11 @@ export default {
       inputWidth_small: 90,
       arrowWidth: 24,
       arrowWidth_small: 19,
-      confirmButtonMinWidth: 60,
-      confirmButtonHeight: 30,
+      confirmButtonMinWidth: 175,
+      confirmButtonHeight: 25,
       confirmButtonPadding: {
-        vertical: 6,
-        horizontal: 20,
+        vertical: 3,
+        horizontal: 0,
       },
     },
 
