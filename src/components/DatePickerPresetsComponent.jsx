@@ -236,13 +236,13 @@ class DatePickerPresetsComponent extends React.Component {
         <DateRangePicker
           {...props}
           initialVisibleMonth={()=>((startDate||moment()).subtract(1,"month"))}
-          calendarInfoPosition="after"
           onDatesChange={this.onDatesChange}
           onFocusChange={this.onFocusChange}
           focusedInput={focusedInput}
           startDate={startDate}
           verticalSpacing={10}
           endDate={endDate}
+          calendarInfoPosition="after"
           renderCalendarInfo={this.generatePresetOption}
         />
       </div>
