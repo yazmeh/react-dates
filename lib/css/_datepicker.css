@@ -1283,5 +1283,11 @@
   bottom: 0
 }
 .DateTimeRangePicker_ConfirmWrapper {
-  display: initial
+  position: relative;
+  font-weight: 700;
+  border: 0;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: transparent
 }

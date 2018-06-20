@@ -176,7 +176,7 @@ class DateTimePickerComponent extends React.Component {
               })}
             </div>
             {!!(this.onApply || this.onCancel) &&
-              <div {...css(styles.DateTimePickerComponent_ConfirmWrapper)}>
+              <div {...css(styles.DateTimeRangePicker_ConfirmWrapper)}>
                 {!!this.onApply &&
                 <div {...css(styles.DateTimePickerComponent_ConfirmButton_Wrapper)}>
                   <button
@@ -363,7 +363,11 @@ export default withStyles(({ reactDates: { color, sizing } }) => (
       bottom: 0,
     },
     DateTimeRangePicker_ConfirmWrapper: {
-      display:"initial"
+      position:"relative",
+      fontWeight:"bold",
+      border:0,
+      height: "fit-content",
+      backgroundColor:"transparent",
     },
   }
 ))(DateTimePickerComponent);
