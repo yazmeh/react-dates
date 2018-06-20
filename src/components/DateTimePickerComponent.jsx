@@ -20,6 +20,7 @@ const propTypes = {
     'onFocusChange',
   ]),
   ...withStylesPropTypes,
+  applyOnPreset:PropTypes.bool,
   presetOptions: PropTypes.array
 };
 const today = moment().hour(12);
@@ -48,6 +49,7 @@ const defaultProps = {
   regular: false,
 
   // calendar presentation and interaction related props
+  applyOnPreset:false,
   renderMonth: null,
   orientation: HORIZONTAL_ORIENTATION,
   anchorDirection: ANCHOR_RIGHT,
@@ -115,6 +117,7 @@ class DateTimePickerComponent extends React.Component {
     };
     this.onDatesChange = this.onDatesChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
+    this.onPresetSelect = this.onPresetSelect.bind(this);
     this.generatePresetOption = this.generatePresetOption.bind(this);
     this.onApply = this.onApply.bind(this);
     this.onCancel = this.onCancel.bind(this);
@@ -135,6 +138,18 @@ class DateTimePickerComponent extends React.Component {
       });
     }
   }
+  onPresetSelect({startDate,endDate}){
+    const {
+      selected,
+    }=this.state;
+    const {
+      applyOnPreset,
+    } = this.props
+    this.onDatesChange({ startDate, endDate })
+    if (applyOnPreset){
+      this.onApply({ startDate, endDate });
+    }
+  }
   generatePresetOption() {
     const { styles, presetOptions } = this.props;
     const { startDate, endDate } = this.state;
@@ -153,7 +168,7 @@ class DateTimePickerComponent extends React.Component {
                       isSelected && styles.PresetOptionMenu_item_selected,
                     )}
                     type="button"
-                    onClick={() => this.onDatesChange({ startDate: start, endDate: end })}
+                    onClick={() => this.onPresetSelect({ startDate: start, endDate: end })}
                   >
                   {text}
                   </button>
@@ -238,17 +253,18 @@ class DateTimePickerComponent extends React.Component {
   }
   render() {
     const props = omit(this.props, [
-      'autoFocus',
-      'autoFocusEndDate',
-      'initialStartDate',
-      'initialEndDate',
-      'stateDateWrapper',
-      'onApply',
-      'onCancel',
-      'selected',
-      'startDate',
-      'endDate',
-      'presetOptions',
+      "autoFocus",
+      "autoFocusEndDate",
+      "initialStartDate",
+      "initialEndDate",
+      "stateDateWrapper",
+      "onApply",
+      "onCancel",
+      "selected",
+      "startDate",
+      "endDate",
+      "presetOptions",
+      "applyOnPreset",
     ]);
     const {
       startDate,
@@ -347,7 +363,7 @@ export default withStyles(({ reactDates: { color, sizing } }) => (
       bottom: 0,
     },
     DateTimeRangePicker_ConfirmWrapper: {
-
+      display:"initial"
     },
   }
 ))(DateTimePickerComponent);

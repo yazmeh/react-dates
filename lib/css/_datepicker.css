@@ -1282,3 +1282,6 @@
   top: 0;
   bottom: 0
 }
+.DateTimeRangePicker_ConfirmWrapper {
+  display: initial
+}
