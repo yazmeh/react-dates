@@ -80,7 +80,7 @@ const defaultProps = {
   renderDayContents: null,
   minimumNights: 1,
   enableOutsideDays: false,
-  isDayBlocked: day => day.isBefore(today),
+  isDayBlocked: day => day.isBefore(today.clone()),
   isOutsideRange: day => !isInclusivelyAfterDay(day, moment()),
   isDayHighlighted: () => false,
 

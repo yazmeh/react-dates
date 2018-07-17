@@ -470,10 +470,14 @@ export default class DayTimePickerRangeController extends React.Component {
 
     let { startDate, endDate } = this.props;
     let day;
-    if (focusedInput === START_DATE) { day = selDay.clone().set({ hour: this.state.startTime.hour(), minute: this.state.startTime.minute() }); } else if (focusedInput === END_DATE) { day = selDay.clone().set({ hour: this.state.endTime.hour(), minute: this.state.endTime.minute() }); } else if (focusedInput) { day = selDay; }
+    if (focusedInput === START_DATE) { 
+      day = selDay.clone().set({ 
+        hour: this.state.startTime.hour(), 
+        minute: this.state.startTime.minute() 
+      }); } else if (focusedInput === END_DATE) { day = selDay.clone().set({ hour: this.state.endTime.hour(), minute: this.state.endTime.minute() }); } else if (focusedInput) { day = selDay; }
     if (startDateOffset || endDateOffset) {
-      startDate = getSelectedDateOffset(startDateOffset, day);
-      endDate = getSelectedDateOffset(endDateOffset, day);
+      startDate = getSelectedDateOffset(startDateOffset, selDay);
+      endDate = getSelectedDateOffset(endDateOffset, selday);
 
       if (!keepOpenOnDateSelect) {
         onFocusChange(null);
@@ -793,12 +797,13 @@ export default class DayTimePickerRangeController extends React.Component {
     );
     const currentMonth = initialVisibleMonthThunk();
     const withoutTransitionMonths = orientation === VERTICAL_SCROLLABLE;
-    const visibleDays = this.getModifiers(getVisibleDays(
+    const mid = getVisibleDays(
       currentMonth,
       numberOfMonths,
       enableOutsideDays,
       withoutTransitionMonths,
-    ));
+    )
+    const visibleDays = this.getModifiers(mid);
     return { currentMonth, visibleDays };
   }
 
