@@ -9,6 +9,8 @@ import { DateRangePickerPhrases } from '../defaultPhrases';
 import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, ANCHOR_RIGHT } from '../constants';
 import isInclusivelyAfterDay from '../utils/isInclusivelyAfterDay';
 import isSameDay from '../utils/isSameDay';
+import isSameHour from "../utils/isSameHour";
+
 
 
 const propTypes = {
@@ -80,8 +82,8 @@ const defaultProps = {
   renderDayContents: null,
   minimumNights: 1,
   enableOutsideDays: false,
-  isDayBlocked: day => day.isBefore(today.clone()),
-  isOutsideRange: day => !isInclusivelyAfterDay(day, moment()),
+  isDayBlocked: day => !day.isBefore(today.clone()),
+  isOutsideRange: day => !isInclusivelyAfterDay(day, today),
   isDayHighlighted: () => false,
 
   // internationalization
@@ -151,13 +153,36 @@ class DateTimePickerComponent extends React.Component {
     }
   }
   generatePresetOption() {
-    const { styles, presetOptions } = this.props;
+    const { styles, presetOptions,presetTime } = this.props;
     const { startDate, endDate } = this.state;
     if (presetOptions){
       return (
         <div {...css(styles.PresetOptionMenu_Wrapper)}>
           <div {...css(styles.DateTimePickerComponent_menu)}>
             <div {...css(styles.PresetOptionMenu)}>
+              {presetTime && <div
+                {...css(
+                  styles.PresetOptionMenu_item_time,
+                )}
+                >
+                <div>Select Hour</div>
+                <div
+                  {...css(
+                    styles.PresetTime_Menu,
+                  )}
+                >
+                  {presetTime.map(
+                    ({ text, start, end }) => {
+                      const isSelected=isSameHour(start,startDate) && isSameHour(end,endDate)
+                      return (<span
+                    {...css(
+                      styles.PresetTime_Menu_Item,
+                      isSelected && styles.PresetTime_Menu_Item_selected,
+                    )}
+                    ><button onClick={() => this.onPresetSelect({ startDate: start, endDate: end })}>{text}</button></span>)}
+                     )}
+                </div>
+              </div>}
               {presetOptions.map(({ text, start, end }) => {
                 const isSelected = isSameDay(start, startDate) && isSameDay(end, endDate);
                 return (
@@ -299,6 +324,40 @@ export default withStyles(({ reactDates: { color, sizing } }) => (
   {
     PresetOptionMenu_Wrapper: {
       width:200
+    },
+    PresetOptionMenu_item_time:{
+      position: "relative",
+      border: 0,
+      outline: 0,
+      borderBottom: `1px solid ${color.core.borderLight}`,
+      display: "block",
+      width: 200,
+      padding: "5px 10px",
+    },
+    PresetTime_Menu:{
+      margin: '5px auto',
+      display: 'table',
+      borderRadius:4,
+    },
+    PresetTime_Menu_Item:{
+      border: `1px solid ${color.core.borderLight}`,
+      borderRightWidth:0,
+      display:'table-cell',
+      ':hover': {
+        backgroundColor: color.core.primary,
+        color: color.background,
+      },
+      ':first-child':{
+        borderRadius:'4px 0 0 4px'
+      },
+      ':last-child': {
+        borderRadius: '0 4px 4px 0',
+        borderRightWidth: 1,
+      }
+    },
+    PresetTime_Menu_Item_selected:{
+      backgroundColor: color.core.primary,
+      color: color.background,
     },
     PresetOptionMenu_item: {
       position: "relative",

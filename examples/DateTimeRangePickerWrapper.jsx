@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
 import moment from 'moment';
 import omit from 'lodash/omit';
+//import BootstrapTable from "react-bootstrap-table-next";
 
 import DateTimeRangePicker from '../src/components/DateTimeRangePicker';
 
@@ -136,7 +137,6 @@ class DateRangePickerWrapper extends React.Component {
             'initialEndDate',
             'stateDateWrapper',
         ]);
-
         return (
             <div>
                 <DateTimeRangePicker

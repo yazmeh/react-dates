@@ -5,7 +5,7 @@ import moment from 'moment';
 import omit from 'lodash/omit';
 
 import DateRangePicker from '../src/components/DateRangePicker';
-
+//import BootStrapTable from 'react-bootstrap-table-next';
 import { DateRangePickerPhrases } from '../src/defaultPhrases';
 import DateRangePickerShape from '../src/shapes/DateRangePickerShape';
 import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, ANCHOR_LEFT } from '../src/constants';
