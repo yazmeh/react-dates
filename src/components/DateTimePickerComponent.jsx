@@ -261,19 +261,7 @@ class DateTimePickerComponent extends React.Component {
     });
   }
   onFocusChange(focusedInput) {
-    const {
-      selected,
-    } = this.state;
-    const {
-      stateDateWrapper,
-    } = this.props;
-    if (focusedInput == null) {
-      this.setState({
-        startDate: selected.startDate && stateDateWrapper(selected.startDate),
-        endDate: selected.startDate && stateDateWrapper(selected.startDate),
-        focusedInput,
-      });
-    }
+    
     this.setState({ focusedInput });
   }
   render() {

@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export default function isSameDay(a, b) {
+export default function isSameHour(a, b) {
   if (!moment.isMoment(a) || !moment.isMoment(b)) return false;
   // Compare least significant, most likely to change units first
   // Moment's isSame clones moment inputs and is a tad slow

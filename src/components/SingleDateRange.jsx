@@ -6,8 +6,11 @@ import CalendarIcon from './CalendarIcon';
 
 const propTypes = {
   ...withStylesPropTypes,
+  dateValues:PropTypes.object,
+  inputDateTimeElement:PropTypes.func,
   startDate: PropTypes.string,
   startDateId: PropTypes.string,
+  showDefaultInputIcon:PropTypes.bool,
   startDatePlaceholderText: PropTypes.string,
   isStartDateFocused: PropTypes.bool,
   rangeSeparator: PropTypes.string,
@@ -23,7 +26,6 @@ const defaultProps = {
   startDateId: START_DATE,
   startDatePlaceholderText: 'Start Date',
   isStartDateFocused: false,
-
   endDate: null,
   endDateId: END_DATE,
   endDatePlaceholderText: 'End Date',
@@ -38,8 +40,11 @@ const defaultProps = {
 class SingleDateRange extends React.Component {
   render() {
     const {
+      dateValues,
+      inputDateTimeElement,
       startDate,
       endDate,
+      showDefaultInputIcon,
       rangeSeparator,
       styles,
       small,
@@ -53,12 +58,14 @@ class SingleDateRange extends React.Component {
                     small ? styles.SingleDateRange_small : styles.SingleDateRange_normal,
                 )}
       >
-        <div>
-          {`${startDate}${rangeSeparator}${endDate}`}
-        </div>
-        <div {...css(styles.SingleDateRange_calendarIcon)}>
+        {inputDateTimeElement ? inputDateTimeElement(dateValues):
+          <div>
+            {`${startDate}${rangeSeparator}${endDate}`}
+          </div>
+        }
+        {showDefaultInputIcon && <div {...css(styles.SingleDateRange_calendarIcon)}>
           <CalendarIcon {...css(styles.SingleDateRange_calendarIcon_svg)} />
-        </div>
+        </div>}
       </div>
     );
   }

@@ -23,7 +23,8 @@ const propTypes = forbidExtraProps({
   startDateId: PropTypes.string,
   startDatePlaceholderText: PropTypes.string,
   isStartDateFocused: PropTypes.bool,
-
+  showDefaultInputIcon:PropTypes.bool,
+  inputDateTimeElement:PropTypes.func,
   endDate: momentPropTypes.momentObj,
   endDateId: PropTypes.string,
   endDatePlaceholderText: PropTypes.string,
@@ -99,7 +100,9 @@ export default class SingleDateRangeController extends React.Component {
       isStartDateFocused,
       rangeSeparator,
       endDate,
+      showDefaultInputIcon,
       endDateId,
+      inputDateTimeElement,
       endDatePlaceholderText,
       isEndDateFocused,
       isRTL,
@@ -110,6 +113,8 @@ export default class SingleDateRangeController extends React.Component {
 
     return (
       <SingleDateRange
+        inputDateTimeElement={inputDateTimeElement}
+        dateValues={{startDate,endDate}}
         startDate={startDateString}
         startDateId={startDateId}
         startDatePlaceholderText={startDatePlaceholderText}
@@ -117,6 +122,7 @@ export default class SingleDateRangeController extends React.Component {
         rangeSeparator={rangeSeparator}
         endDate={endDateString}
         endDateId={endDateId}
+        showDefaultInputIcon={showDefaultInputIcon}
         endDatePlaceholderText={endDatePlaceholderText}
         isEndDateFocused={isEndDateFocused}
         onStartDateFocus={this.onStartDateFocus}

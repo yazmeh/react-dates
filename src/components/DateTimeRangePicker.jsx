@@ -554,6 +554,7 @@ class DateTimeRangePicker extends React.Component {
       endDateId,
       endDatePlaceholderText,
       focusedInput,
+      inputDateTimeElement,
       screenReaderInputMessage,
       showClearDates,
       showDefaultInputIcon,
@@ -602,6 +603,8 @@ class DateTimeRangePicker extends React.Component {
       >
         <OutsideClickHandler onOutsideClick={onOutsideClick}>
           <SingleDateRangeController
+            showDefaultInputIcon={showDefaultInputIcon}
+            inputDateTimeElement={inputDateTimeElement}
             startDate={selected.startDate}
             startDateId={startDateId}
             startDatePlaceholderText={startDatePlaceholderText}
@@ -614,7 +617,6 @@ class DateTimeRangePicker extends React.Component {
             small={small}
             onFocusChange={this.onDateRangePickerInputFocus}
           />
-
           {this.maybeRenderDayPickerWithPortal()}
         </OutsideClickHandler>
       </div>

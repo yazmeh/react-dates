@@ -28,6 +28,7 @@ export default {
   // input related props
   startDateId: PropTypes.string.isRequired,
   startDatePlaceholderText: PropTypes.string,
+  inputDateTimeElement:PropTypes.func,
   endDateId: PropTypes.string.isRequired,
   endDatePlaceholderText: PropTypes.string,
   disabled: DisabledShape,
