@@ -153,8 +153,10 @@ class DateTimePickerComponent extends React.Component {
     }
   }
   generatePresetOption() {
-    const { styles, presetOptions,presetTime } = this.props;
+    const { styles, presetOptions:preOpt,presetTime:preTime } = this.props;
     const { startDate, endDate } = this.state;
+    const presetOptions=typeof preOpt==='function'?preOpt(moment()):preOpt;
+    const presetTime = typeof preTime === "function" ? preTime(moment()) : preTime;
     if (presetOptions){
       return (
         <div {...css(styles.PresetOptionMenu_Wrapper)}>
