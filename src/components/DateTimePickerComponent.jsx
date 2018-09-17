@@ -167,7 +167,7 @@ class DateTimePickerComponent extends React.Component {
                   styles.PresetOptionMenu_item_time,
                 )}
                 >
-                <div>Select Hour</div>
+                <div>Latest Hour</div>
                 <div
                   {...css(
                     styles.PresetTime_Menu,
