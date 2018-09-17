@@ -477,7 +477,7 @@ export default class DayTimePickerRangeController extends React.Component {
         hour: this.state.startTime.hour(), 
         minute: this.state.startTime.minute() 
       }); } else if (focusedInput === END_DATE) { 
-      day = hideTime ? selDayselDay.clone().endOf('day'):selDay.clone().set({ hour: this.state.endTime.hour(), minute: this.state.endTime.minute() });
+      day = hideTime ? selDay.clone().endOf('day'):selDay.clone().set({ hour: this.state.endTime.hour(), minute: this.state.endTime.minute() });
        } 
         else if (focusedInput) { 
           day = selDay; 
