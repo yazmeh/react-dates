@@ -21,6 +21,7 @@ const propTypes = {
     'focusedInput',
     'onFocusChange',
   ]),
+  applyOnSelect:PropTypes.bool,
   ...withStylesPropTypes,
   applyOnPreset:PropTypes.bool,
   presetOptions: PropTypes.array
@@ -64,6 +65,8 @@ const defaultProps = {
   reopenPickerOnClearDates: false,
   isRTL: false,
   hideKeyboardShortcutsPanel:true,
+  applyOnSelect:false,
+
   // navigation related props
   navPrev: null,
   navNext: null,
@@ -148,7 +151,7 @@ class DateTimePickerComponent extends React.Component {
       applyOnPreset,
     } = this.props
     this.onDatesChange({ startDate, endDate })
-    if (applyOnPreset){
+    if (applyOnPreset && !applyOnSelect) {
       this.onApply({ startDate, endDate });
     }
   }
@@ -240,31 +243,42 @@ class DateTimePickerComponent extends React.Component {
     this.setState({
       selected: { ...newDates },
     });
-    onApply(newDates, oldDates);
+    if(onApply){
+      onApply(newDates, oldDates);
+    }
     this.onFocusChange(null);
   }
   onCancel() {
-    const { selected: { startDate, endDate } } = this.state;
+    const { selected} = this.state;
     const { onCancel } = this.props;
-    this.setState({
-      startDate,
-      endDate,
-    });
+    this.onDatesChange(selected)
     if(onCancel){
       onCancel({ startDate, endDate });
     }
     this.onFocusChange(null);
   }
   onDatesChange({ startDate, endDate }) {
-    const { stateDateWrapper } = this.props;
+    const { stateDateWrapper, applyOnSelect } = this.props;
     this.setState({
       startDate: startDate && stateDateWrapper(startDate),
       endDate: endDate && stateDateWrapper(endDate),
     });
+    if (applyOnSelect && !!startDate && !!endDate){
+      this.onApply({startDate,endDate})
+    }
   }
   onFocusChange(focusedInput) {
-    
-    this.setState({ focusedInput });
+    const { selected: { startDate, endDate } } = this.state;
+    if(!focusedInput){
+      this.setState({
+        startDate,
+        endDate,
+        focusedInput
+      });
+    }
+    else{
+      this.setState({ focusedInput });
+    }
   }
   render() {
     const props = omit(this.props, [
@@ -279,6 +293,7 @@ class DateTimePickerComponent extends React.Component {
       "startDate",
       "endDate",
       "presetOptions",
+      "applyOnSelect",
       "applyOnPreset",
     ]);
     const {
