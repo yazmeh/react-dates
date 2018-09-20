@@ -264,7 +264,12 @@ class DateTimePickerComponent extends React.Component {
       endDate: endDate && stateDateWrapper(endDate),
     });
     if (applyOnSelect && !!startDate && !!endDate){
-      this.onApply({startDate,endDate})
+      this.setState({
+        selected: { startDate, endDate },
+      });
+      if (onApply) {
+        onApply({ startDate, endDate }, { startDate: this.state.startDate, endDate: this.state.endDate});
+      }
     }
   }
   onFocusChange(focusedInput) {
