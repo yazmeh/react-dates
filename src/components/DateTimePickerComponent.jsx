@@ -258,7 +258,7 @@ class DateTimePickerComponent extends React.Component {
     this.onFocusChange(null);
   }
   onDatesChange({ startDate, endDate }) {
-    const { stateDateWrapper, applyOnSelect } = this.props;
+    const { stateDateWrapper, applyOnSelect, onApply } = this.props;
     this.setState({
       startDate: startDate && stateDateWrapper(startDate),
       endDate: endDate && stateDateWrapper(endDate),
