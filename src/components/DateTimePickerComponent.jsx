@@ -151,7 +151,7 @@ class DateTimePickerComponent extends React.Component {
       applyOnPreset,
     } = this.props
     this.onDatesChange({ startDate, endDate })
-    if (applyOnPreset && !applyOnSelect) {
+    if (applyOnPreset) {
       this.onApply({ startDate, endDate });
     }
   }
@@ -267,6 +267,9 @@ class DateTimePickerComponent extends React.Component {
       this.setState({
         selected: { startDate, endDate },
       });
+      if(this.state.focusedInput===END_DATE){
+        this.onFocusChange(START_DATE)
+      }
       if (onApply) {
         onApply({ startDate, endDate }, { startDate: this.state.startDate, endDate: this.state.endDate});
       }
