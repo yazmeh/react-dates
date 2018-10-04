@@ -156,7 +156,7 @@ class DateTimePickerComponent extends React.Component {
     }
   }
   generatePresetOption() {
-    const { styles, presetOptions:preOpt,presetTime:preTime } = this.props;
+    const { styles, presetOptions:preOpt,presetTime:preTime,renderCalendarInfo } = this.props;
     const { startDate, endDate } = this.state;
     const presetOptions=typeof preOpt==='function'?preOpt(moment()):preOpt;
     const presetTime = typeof preTime === "function" ? preTime(moment()) : preTime;
@@ -231,6 +231,12 @@ class DateTimePickerComponent extends React.Component {
         </div>
         </div>
       )
+    }
+    if (renderCalendarInfo){
+      return renderCalendarInfo({
+        onFocusChange: this.onFocusChange,
+        onDatesChange:this.onDatesChange,
+      });
     }
   }
   onApply(newDates) {
@@ -316,11 +322,11 @@ class DateTimePickerComponent extends React.Component {
           {...props}
           onDatesChange={this.onDatesChange}
           onFocusChange={this.onFocusChange}
+          onApply={this.onApply}
+          onCancel={this.onCancel}
           selected={selected}
           focusedInput={focusedInput}
           startDate={startDate}
-          onApply={this.onApply}
-          onCancel={this.onCancel}
           verticalSpacing={10}
           endDate={endDate}
           calendarInfoPosition="after"

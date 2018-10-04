@@ -185,13 +185,15 @@ class DateTimeRangePicker extends React.Component {
       startDate,
       endDate
     } = newProps
-    if (!startDate.isSame(this.state.selected.startDate) || !endDate.isSame(this.state.selected.endDate)) {
-      this.setState({
-        selected: {
-          startDate,
-          endDate
-        }
-      });
+    if(startDate && endDate){
+      if (!startDate.isSame(this.state.selected.startDate) || !endDate.isSame(this.state.selected.endDate)) {
+        this.setState({
+          selected: {
+            startDate,
+            endDate
+          }
+        });
+      }
     }
   }
   componentDidUpdate(prevProps) {
