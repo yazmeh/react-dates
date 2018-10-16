@@ -53,24 +53,26 @@ class TimePicker extends React.Component {
       time,
       is24HourFormat
     } = nextProps;
-    this.setState({
-      hour: {
-        min: is24HourFormat ? 0 : 1,
-        max: is24HourFormat ? 23 : 12,
-        format: is24HourFormat ? 'HH' : 'hh',
-        value: time.format(is24HourFormat ? 'HH' : 'hh'),
-      },
-      minute: {
-        min: 0,
-        max: 59,
-        format: 'mm',
-        value: time.format('mm'),
-      },
-      meridiem: {
-        format: 'a',
-        value: time.format('a'),
-      }
-    })
+    if(!prevTime.isSame(time)){
+      this.setState({
+        hour: {
+          min: is24HourFormat ? 0 : 1,
+          max: is24HourFormat ? 23 : 12,
+          format: is24HourFormat ? 'HH' : 'hh',
+          value: time.format(is24HourFormat ? 'HH' : 'hh'),
+        },
+        minute: {
+          min: 0,
+          max: 59,
+          format: 'mm',
+          value: time.format('mm'),
+        },
+        meridiem: {
+          format: 'a',
+          value: time.format('a'),
+        }
+      })
+    }
   }
   onChange(e, type) {
     const state = { ...this.state };
@@ -101,6 +103,7 @@ class TimePicker extends React.Component {
       is24HourFormat,
       type,
     } = this.props;
+    let time;
     if (is24HourFormat) {
       time = moment(`${hour.value}:${minute.value}`, `${hour.format}:${minute.format}`);
     } else {
@@ -111,24 +114,31 @@ class TimePicker extends React.Component {
   onIncrement(type) {
     const state = this.state;
     let time;
+    let input = parseInt(state[type].value);
     if (state[type].value < state[type].max) {
-      let input = parseInt(state[type].value);
       input += 1;
-      state[type].value = input < 10 ? `0${input}` : input;
-      this.setState(state);
-      this.onTimeChange();
     }
+    else{
+      input = state[type].min;      
+    }
+    state[type].value = input < 10 ? `0${input}` : input;
+    this.setState(state);
+    this.onTimeChange();
+
   }
   onDecrement(type) {
     const state = this.state;
     let time;
+    let input = parseInt(state[type].value);
     if (state[type].value > state[type].min) {
-      let input = parseInt(state[type].value);
       input -= 1;
-      state[type].value = input < 10 ? `0${input}` : input;
-      this.setState(state);
-      this.onTimeChange();
     }
+    else{
+      input = state[type].max;
+    }
+    state[type].value = input < 10 ? `0${input}` : input;
+    this.setState(state);
+    this.onTimeChange();
   }
   onFocus(e) {
     e.target.select();
