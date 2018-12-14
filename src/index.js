@@ -10,6 +10,8 @@ export { default as DayPickerRangeController } from './components/DayPickerRange
 export { default as DateTimePickerComponent } from './components/DateTimePickerComponent';
 export { default as DatePickerPresetsComponent } from './components/DatePickerPresetsComponent';
 export { default as DateTimeRangePicker } from './components/DateTimeRangePicker';
+export { default as DayTimePickerRangeController } from './components/DayTimePickerRangeController';
+
 export { default as DayPickerSingleDateController } from './components/DayPickerSingleDateController';
 export { default as OutsideClickHandler } from './components/OutsideClickHandler';
 export { default as SingleDatePicker } from './components/SingleDatePicker';
