@@ -44,6 +44,8 @@ const propTypes = forbidExtraProps({
   startDate: momentPropTypes.momentObj,
   endDate: momentPropTypes.momentObj,
   onDatesChange: PropTypes.func,
+  minDate:momentPropTypes.momentObj,
+  maxDate:momentPropTypes.momentObj,
   startDateOffset: PropTypes.func,
   endDateOffset: PropTypes.func,
 
@@ -114,6 +116,8 @@ const defaultProps = {
   focusedInput: null,
   onFocusChange() { },
   onClose() { },
+  minDate:null,
+  maxDate:null,
 
   displayRangeProp:{},
   keepOpenOnDateSelect: false,
@@ -220,6 +224,8 @@ export default class DayTimePickerRangeController extends React.Component {
       },
       startTime: (Boolean(startDate) && startDate) || moment('12:00', 'hh:mm'),
       endTime: (Boolean(endDate) && endDate) || moment('12:00', 'hh:mm'),
+      disablePrev: this.shouldDisableMonthNavigation(props.minDate, currentMonth),
+      disableNext: this.shouldDisableMonthNavigation(props.maxDate, currentMonth),
       visibleDays,
     };
 
@@ -233,7 +239,16 @@ export default class DayTimePickerRangeController extends React.Component {
     this.getFirstFocusableDay = this.getFirstFocusableDay.bind(this);
     this.setDayPickerRef = this.setDayPickerRef.bind(this);
   }
+  shouldDisableMonthNavigation(date, visibleMonth) {
+    if (!date) return false;
 
+    const {
+      numberOfMonths,
+      enableOutsideDays,
+    } = this.props;
+
+    return isDayVisible(date, visibleMonth, numberOfMonths, enableOutsideDays);
+  }
   componentWillReceiveProps(nextProps) {
     const {
       startDate,
@@ -655,7 +670,7 @@ export default class DayTimePickerRangeController extends React.Component {
   }
 
   onPrevMonthClick() {
-    const { onPrevMonthClick, numberOfMonths, enableOutsideDays } = this.props;
+    const { onPrevMonthClick, numberOfMonths, enableOutsideDays,minDate,maxDate } = this.props;
     const { currentMonth, visibleDays } = this.state;
 
     const newVisibleDays = {};
@@ -668,6 +683,8 @@ export default class DayTimePickerRangeController extends React.Component {
 
     const newCurrentMonth = currentMonth.clone().subtract(1, 'month');
     this.setState({
+      disablePrev: this.shouldDisableMonthNavigation(minDate, newCurrentMonth),
+      disableNext: this.shouldDisableMonthNavigation(maxDate, newCurrentMonth),
       currentMonth: newCurrentMonth,
       visibleDays: {
         ...newVisibleDays,
@@ -679,7 +696,7 @@ export default class DayTimePickerRangeController extends React.Component {
   }
 
   onNextMonthClick() {
-    const { onNextMonthClick, numberOfMonths, enableOutsideDays } = this.props;
+    const { onNextMonthClick, numberOfMonths, enableOutsideDays, minDate, maxDate } = this.props;
     const { currentMonth, visibleDays } = this.state;
 
     const newVisibleDays = {};
@@ -692,6 +709,8 @@ export default class DayTimePickerRangeController extends React.Component {
 
     const newCurrentMonth = currentMonth.clone().add(1, 'month');
     this.setState({
+      disablePrev: this.shouldDisableMonthNavigation(minDate, newCurrentMonth),
+      disableNext: this.shouldDisableMonthNavigation(maxDate, newCurrentMonth),
       currentMonth: newCurrentMonth,
       visibleDays: {
         ...newVisibleDays,
@@ -1062,7 +1081,13 @@ export default class DayTimePickerRangeController extends React.Component {
       verticalBorderSpacing,
     } = this.props;
 
-    const { currentMonth, phrases, visibleDays } = this.state;
+    const { 
+      currentMonth, 
+      phrases, 
+      visibleDays, 
+      disablePrev,
+      disableNext,
+    } = this.state;
 
     return (
       <div>
@@ -1074,6 +1099,8 @@ export default class DayTimePickerRangeController extends React.Component {
           enableOutsideDays={enableOutsideDays}
           modifiers={visibleDays}
           startTime={this.state.startTime}
+          disablePrev={disablePrev}
+          disableNext={disableNext}
           endTime={this.state.endTime}
           numberOfMonths={numberOfMonths}
           onDayClick={this.onDayClick}

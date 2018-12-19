@@ -43,6 +43,8 @@ import {
 const propTypes = {
   ...withStylesPropTypes,
   ...DateTimeRangePickerShape,
+  minDate: PropTypes.object,
+  maxDate: PropTypes.object,
 };
 
 const defaultProps = {
@@ -50,7 +52,7 @@ const defaultProps = {
   startDate: null,
   endDate: null,
   focusedInput: null,
-
+  
   // input related props
   startDatePlaceholderText: 'Start Date',
   endDatePlaceholderText: 'End Date',
@@ -426,6 +428,8 @@ class DateTimeRangePicker extends React.Component {
       verticalSpacing,
       small,
       disabled,
+      minDate,
+      maxDate,
       theme: { reactDates },
     } = this.props;
     const {
@@ -494,6 +498,8 @@ class DateTimeRangePicker extends React.Component {
               onNextMonthClick={onNextMonthClick}
               onDatesChange={this.dateChange}
               onFocusChange={onFocusChange}
+              minDate={minDate}
+              maxDate={maxDate}
               onClose={onClose}
               focusedInput={focusedInput}
               startDate={startDate}

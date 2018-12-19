@@ -906,6 +906,9 @@
   width: 42px;
   fill: #565a5c
 }
+.DayPickerNavigation_svg__disabled {
+  fill: #f2f2f2
+}
 .DateDisplay {
   display: inline-block;
   width: 50%;

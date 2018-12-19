@@ -55,6 +55,8 @@ const propTypes = forbidExtraProps({
   enableOutsideDays: PropTypes.bool,
   numberOfMonths: PropTypes.number,
   orientation: ScrollableOrientationShape,
+  disablePrev: PropTypes.bool,
+  disableNext: PropTypes.bool,
   withPortal: PropTypes.bool,
   onOutsideClick: PropTypes.func,
   hidden: PropTypes.bool,
@@ -69,7 +71,7 @@ const propTypes = forbidExtraProps({
   noBorder: PropTypes.bool,
   transitionDuration: nonNegativeInteger,
   verticalBorderSpacing: nonNegativeInteger,
-  displayRangeProp:PropTypes.object,
+  displayRangeProp: PropTypes.object,
 
   // navigation props
   navPrev: PropTypes.node,
@@ -86,7 +88,7 @@ const propTypes = forbidExtraProps({
   startTime: PropTypes.object,
   endTime: PropTypes.object,
   onTimeChange: PropTypes.func,
-  disableMinutes:PropTypes.bool,
+  disableMinutes: PropTypes.bool,
   hideTime: PropTypes.bool,
 
   // day props
@@ -107,7 +109,7 @@ const propTypes = forbidExtraProps({
   monthFormat: PropTypes.string,
   weekDayFormat: PropTypes.string,
   phrases: PropTypes.shape(getPhrasePropTypes(DayPickerPhrases)),
-  dayAriaLabelFormat: PropTypes.string,
+  dayAriaLabelFormat: PropTypes.string
 });
 
 export const defaultProps = {
@@ -653,6 +655,8 @@ class DayTimePicker extends React.Component {
       orientation,
       phrases,
       isRTL,
+      disablePrev,
+      disableNext,
     } = this.props;
 
     let onNextMonthClick;
@@ -668,6 +672,8 @@ class DayTimePicker extends React.Component {
         onNextMonthClick={onNextMonthClick}
         navPrev={navPrev}
         navNext={navNext}
+        disablePrev={disablePrev}
+        disableNext={disableNext}
         orientation={orientation}
         phrases={phrases}
         isRTL={isRTL}
