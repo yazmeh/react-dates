@@ -101,6 +101,7 @@ class TimePicker extends React.Component {
       is24HourFormat,
       type,
     } = this.props;
+    let time;
     if (is24HourFormat) {
       time = moment(`${hour.value}:${minute.value}`, `${hour.format}:${minute.format}`);
     } else {
@@ -121,7 +122,6 @@ class TimePicker extends React.Component {
   }
   onDecrement(type) {
     const state = this.state;
-    let time;
     if (state[type].value > state[type].min) {
       let input = parseInt(state[type].value);
       input -= 1;
@@ -167,7 +167,7 @@ class TimePicker extends React.Component {
     } = this.props;
     return (
       <div
-        {...css(styles.TimePicker)}
+        {...css(styles.TimePicker,)}
       >
         <div
           className="hour"
@@ -253,7 +253,19 @@ export default withStyles((props) => {
   //console.log(props);
   return {
     TimePicker: {
-      width: '50%',
+      width:'50%',
+      ':only-child':{
+        width: '100%'
+      },
+      height: '90px',
+      backgroundColor: '#F0F6FB',
+      display: 'inline-flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      border: '1px solid #E7EAF0',
+    },
+    TimePicker_single: {
+      width: '100%',
       height: '90px',
       backgroundColor: '#F0F6FB',
       display: 'inline-flex',
