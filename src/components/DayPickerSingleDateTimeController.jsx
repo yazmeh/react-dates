@@ -307,16 +307,20 @@ export default class DayPickerSingleDateTimeController extends React.Component {
         this.today = moment();
     }
 
-    onDayClick(day, e) {
+    onDayClick(selday, e) {
         if (e) e.preventDefault();
-        if (this.isBlocked(day)) return;
+        if (this.isBlocked(selday)) return;
         const {
             onDateChange,
             keepOpenOnDateSelect,
             onFocusChange,
             onClose,
+            hideTime
         } = this.props;
-
+        const day = hideTime ? selday.clone().startOf('day') : selday.clone().set({
+            hour: this.state.time.hour(),
+            minute: this.state.time.minute()
+        });
         onDateChange(day);
         if (!keepOpenOnDateSelect) {
             onFocusChange({ focused: false });

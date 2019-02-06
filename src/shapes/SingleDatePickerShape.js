@@ -84,4 +84,9 @@ export default {
   weekDayFormat: PropTypes.string,
   phrases: PropTypes.shape(getPhrasePropTypes(SingleDatePickerPhrases)),
   dayAriaLabelFormat: PropTypes.string,
+
+  //time
+  is24HourFormat: PropTypes.bool,
+  hidetime: PropTypes.bool,
+  disableMinutes: PropTypes.bool,
 };

@@ -39,10 +39,6 @@ import {
 const propTypes = forbidExtraProps({
     ...withStylesPropTypes,
     ...SingleDatePickerShape,
-    //time
-    is24HourFormat: PropTypes.bool,
-    hidetime: PropTypes.bool,
-    disableMinutes: PropTypes.bool,
 });
 
 const defaultProps = {
