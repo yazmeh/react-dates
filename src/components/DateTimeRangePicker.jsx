@@ -67,6 +67,7 @@ const defaultProps = {
   small: false,
   regular: false,
   keepFocusOnInput: false,
+  inputDateTimeElement:null,
 
   // calendar presentation and interaction related props
   renderMonthText: null,
@@ -606,6 +607,7 @@ class DateTimeRangePicker extends React.PureComponent {
       minimumNights,
       withPortal,
       withFullScreenPortal,
+      inputDateTimeElement,
       displayFormat,
       reopenPickerOnClearDates,
       keepOpenOnDateSelect,
@@ -630,6 +632,7 @@ class DateTimeRangePicker extends React.PureComponent {
 
     const input = (
       <SingleDateRangeController
+        inputDateTimeElement={inputDateTimeElement}
         startDate={startDate}
         startDateId={startDateId}
         startDatePlaceholderText={startDatePlaceholderText}

@@ -11,6 +11,7 @@ export default {
     startDate:momentPropTypes.momentObj,
     endDate:momentPropTypes.momentObj,
   }),
+  inputDateTimeElement:PropTypes.func,
   onApply:PropTypes.func,
   onCancel:PropTypes.func,
 };
