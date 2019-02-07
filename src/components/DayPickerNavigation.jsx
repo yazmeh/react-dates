@@ -131,6 +131,8 @@ function DayPickerNavigation({
             styles.DayPickerNavigation_button,
             isDefaultNavPrev && styles.DayPickerNavigation_button__default,
             disablePrev && styles.DayPickerNavigation_button__disabled,
+            !isRTL && styles.DayPickerNavigation_leftButton,
+            isRTL && styles.DayPickerNavigation_rightButton,
             ...(isHorizontal ? [
               styles.DayPickerNavigation_button__horizontal,
               ...(isDefaultNavPrev ? [
@@ -169,6 +171,8 @@ function DayPickerNavigation({
           styles.DayPickerNavigation_button,
           isDefaultNavNext && styles.DayPickerNavigation_button__default,
           disableNext && styles.DayPickerNavigation_button__disabled,
+          isRTL && styles.DayPickerNavigation_leftButton,
+          !isRTL && styles.DayPickerNavigation_rightButton,
           ...(isHorizontal ? [
             styles.DayPickerNavigation_button__horizontal,
             ...(isDefaultNavNext ? [
@@ -286,7 +290,12 @@ export default withStyles(({ reactDates: { color, zIndex } }) => ({
     borderRadius: 3,
     padding: '6px 9px',
   },
-
+  DayPickerNavigation_leftButton:{
+    cursor: 'pointer',    
+  },
+  DayPickerNavigation_rightButton: {
+    cursor: 'pointer',    
+  },
   DayPickerNavigation_leftButton__horizontalDefault: {
     left: noflip(22),
   },

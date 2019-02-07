@@ -906,6 +906,10 @@
   border-radius: 3px;
   padding: 6px 9px
 }
+.DayPickerNavigation_leftButton,
+.DayPickerNavigation_rightButton {
+  cursor: pointer
+}
 .DayPickerNavigation_leftButton__horizontalDefault {
   left: 22px
 }
