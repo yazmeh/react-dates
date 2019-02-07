@@ -5,7 +5,7 @@ import moment from 'moment';
 import omit from 'lodash/omit';
 
 import DateRangePicker from '../src/components/DateRangePicker';
-//import BootStrapTable from 'react-bootstrap-table-next';
+
 import { DateRangePickerPhrases } from '../src/defaultPhrases';
 import DateRangePickerShape from '../src/shapes/DateRangePickerShape';
 import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, ANCHOR_LEFT } from '../src/constants';
@@ -53,7 +53,7 @@ const defaultProps = {
   regular: false,
 
   // calendar presentation and interaction related props
-  renderMonth: null,
+  renderMonthText: null,
   orientation: HORIZONTAL_ORIENTATION,
   anchorDirection: ANCHOR_LEFT,
   horizontalMargin: 0,
@@ -68,9 +68,9 @@ const defaultProps = {
   // navigation related props
   navPrev: null,
   navNext: null,
-  onPrevMonthClick() {},
-  onNextMonthClick() {},
-  onClose() {},
+  onPrevMonthClick() { },
+  onNextMonthClick() { },
+  onClose() { },
 
   // day presentation and interaction related props
   renderCalendarDay: undefined,
@@ -78,7 +78,7 @@ const defaultProps = {
   minimumNights: 1,
   enableOutsideDays: false,
   isDayBlocked: () => false,
-  isOutsideRange: day => isInclusivelyAfterDay(day, moment()),
+  isOutsideRange: day => !isInclusivelyAfterDay(day, moment()),
   isDayHighlighted: () => false,
 
   // internationalization
@@ -101,17 +101,13 @@ class DateRangePickerWrapper extends React.Component {
     }
 
     this.state = {
-      focusedInput, 
-      startDate: moment(),
-      endDate: moment().subtract(- 14, 'days'),
+      focusedInput,
+      startDate: props.initialStartDate,
+      endDate: props.initialEndDate,
     };
 
     this.onDatesChange = this.onDatesChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
-    this.onDatesChange({
-      startDate: moment().subtract(-14, 'days'),
-      endDate: moment()
-    })
   }
 
   onDatesChange({ startDate, endDate }) {
@@ -146,9 +142,6 @@ class DateRangePickerWrapper extends React.Component {
           {...props}
           onDatesChange={this.onDatesChange}
           onFocusChange={this.onFocusChange}
-          displayFormat="MM/DD/YYYY HH:MM:SS"
-          verticalSpacing={0}
-          keepOpenOnDateSelect={true}
           focusedInput={focusedInput}
           startDate={startDate}
           endDate={endDate}

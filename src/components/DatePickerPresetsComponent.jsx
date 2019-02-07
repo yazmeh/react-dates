@@ -52,7 +52,7 @@ const defaultProps = {
   onCancel:()=>{},
 
   // calendar presentation and interaction related props
-  renderMonth: null,
+  renderMonthText: null,
   orientation: HORIZONTAL_ORIENTATION,
   anchorDirection: ANCHOR_RIGHT,
   horizontalMargin: 0,

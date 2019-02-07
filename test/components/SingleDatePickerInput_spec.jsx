@@ -6,6 +6,19 @@ import sinon from 'sinon-sandbox';
 import SingleDatePickerInput from '../../src/components/SingleDatePickerInput';
 
 describe('SingleDatePickerInput', () => {
+  describe('render', () => {
+    it('should render any children provided', () => {
+      const Child = () => <div>CHILD</div>;
+
+      const wrapper = shallow((
+        <SingleDatePickerInput id="date">
+          <Child />
+        </SingleDatePickerInput>
+      )).dive();
+      expect(wrapper.find(Child)).to.have.lengthOf(1);
+    });
+  });
+
   describe('clear date', () => {
     describe('props.showClearDate is falsy', () => {
       it('does not render a clear date button', () => {
@@ -78,7 +91,7 @@ describe('SingleDatePickerInput', () => {
         )).dive();
         const clearDateWrapper = wrapper.find('button');
         clearDateWrapper.simulate('click');
-        expect(onClearDateSpy.called).to.equal(true);
+        expect(onClearDateSpy).to.have.property('called', true);
       });
     });
   });

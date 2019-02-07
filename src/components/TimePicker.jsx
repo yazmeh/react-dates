@@ -1,3 +1,4 @@
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import shallowCompare from 'react-addons-shallow-compare';
@@ -101,6 +102,7 @@ class TimePicker extends React.Component {
       is24HourFormat,
       type,
     } = this.props;
+    let time;
     if (is24HourFormat) {
       time = moment(`${hour.value}:${minute.value}`, `${hour.format}:${minute.format}`);
     } else {

@@ -21,6 +21,8 @@ const propTypes = forbidExtraProps({
   startDateOffset: PropTypes.func,
   endDateOffset: PropTypes.func,
   showInputs: PropTypes.bool,
+  minDate: momentPropTypes.momentObj,
+  maxDate: momentPropTypes.momentObj,
 
   keepOpenOnDateSelect: PropTypes.bool,
   minimumNights: PropTypes.number,
@@ -32,9 +34,12 @@ const propTypes = forbidExtraProps({
   enableOutsideDays: PropTypes.bool,
   numberOfMonths: PropTypes.number,
   orientation: ScrollableOrientationShape,
+  verticalHeight: PropTypes.number,
   withPortal: PropTypes.bool,
   initialVisibleMonth: PropTypes.func,
   renderCalendarInfo: PropTypes.func,
+  renderMonthElement: PropTypes.func,
+  renderMonthText: PropTypes.func,
 
   navPrev: PropTypes.node,
   navNext: PropTypes.node,
@@ -59,6 +64,8 @@ const defaultProps = {
   startDateOffset: undefined,
   endDateOffset: undefined,
   showInputs: false,
+  minDate: null,
+  maxDate: null,
 
   // day presentation and interaction related props
   renderCalendarDay: undefined,
@@ -71,6 +78,7 @@ const defaultProps = {
 
   // calendar presentation and interaction related props
   orientation: HORIZONTAL_ORIENTATION,
+  verticalHeight: undefined,
   withPortal: false,
   initialVisibleMonth: null,
   numberOfMonths: 2,
@@ -78,6 +86,8 @@ const defaultProps = {
   keepOpenOnDateSelect: false,
   renderCalendarInfo: null,
   isRTL: false,
+  renderMonthText: null,
+  renderMonthElement: null,
 
   // navigation related props
   navPrev: null,
@@ -130,7 +140,7 @@ class DayPickerRangeControllerWrapper extends React.Component {
     const endDateString = endDate && endDate.format('YYYY-MM-DD');
 
     return (
-      <div>
+      <div style={{ height: '100%' }}>
         {showInputs &&
           <div style={{ marginBottom: 16 }}>
             <input type="text" name="start date" value={startDateString} readOnly />

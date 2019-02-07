@@ -5,6 +5,7 @@ import { css, withStyles, withStylesPropTypes } from 'react-with-styles';
 
 import { SingleDatePickerInputPhrases } from '../defaultPhrases';
 import getPhrasePropTypes from '../utils/getPhrasePropTypes';
+import noflip from '../utils/noflip';
 
 import DateInput from './DateInput';
 import IconPositionShape from '../shapes/IconPositionShape';
@@ -18,6 +19,7 @@ import { ICON_BEFORE_POSITION, ICON_AFTER_POSITION, OPEN_DOWN } from '../constan
 const propTypes = forbidExtraProps({
   ...withStylesPropTypes,
   id: PropTypes.string.isRequired,
+  children: PropTypes.node,
   placeholder: PropTypes.string, // also used as label
   displayValue: PropTypes.string,
   screenReaderMessage: PropTypes.string,
@@ -53,6 +55,7 @@ const propTypes = forbidExtraProps({
 });
 
 const defaultProps = {
+  children: null,
   placeholder: 'Select Date',
   displayValue: '',
   screenReaderMessage: '',
@@ -89,6 +92,7 @@ const defaultProps = {
 
 function SingleDatePickerInput({
   id,
+  children,
   placeholder,
   displayValue,
   focused,
@@ -182,6 +186,8 @@ function SingleDatePickerInput({
         block={block}
       />
 
+      {children}
+
       {showClearDate && (
         <button
           {...css(
@@ -193,8 +199,6 @@ function SingleDatePickerInput({
           type="button"
           aria-label={phrases.clearDate}
           disabled={disabled}
-          onMouseEnter={this.onClearDateMouseEnter}
-          onMouseLeave={this.onClearDateMouseLeave}
           onClick={onClearDate}
         >
           {closeIcon}
@@ -210,18 +214,21 @@ function SingleDatePickerInput({
 SingleDatePickerInput.propTypes = propTypes;
 SingleDatePickerInput.defaultProps = defaultProps;
 
-export default withStyles(({ reactDates: { color } }) => ({
+export default withStyles(({ reactDates: { border, color } }) => ({
   SingleDatePickerInput: {
     display: 'inline-block',
     backgroundColor: color.background,
   },
 
   SingleDatePickerInput__withBorder: {
-    border: `1px solid ${color.core.border}`,
+    borderColor: color.border,
+    borderWidth: border.pickerInput.borderWidth,
+    borderStyle: border.pickerInput.borderStyle,
+    borderRadius: border.pickerInput.borderRadius,
   },
 
   SingleDatePickerInput__rtl: {
-    direction: 'rtl',
+    direction: noflip('rtl'),
   },
 
   SingleDatePickerInput__disabled: {
@@ -233,7 +240,7 @@ export default withStyles(({ reactDates: { color } }) => ({
   },
 
   SingleDatePickerInput__showClearDate: {
-    paddingRight: 30,
+    paddingRight: 30, // TODO: should be noflip wrapped and handled by an isRTL prop
   },
 
   SingleDatePickerInput_clearDate: {
@@ -246,9 +253,9 @@ export default withStyles(({ reactDates: { color } }) => ({
 
     cursor: 'pointer',
     padding: 10,
-    margin: '0 10px 0 5px',
+    margin: '0 10px 0 5px', // TODO: should be noflip wrapped and handled by an isRTL prop
     position: 'absolute',
-    right: 0,
+    right: 0, // TODO: should be noflip wrapped and handled by an isRTL prop
     top: '50%',
     transform: 'translateY(-50%)',
   },
@@ -296,7 +303,7 @@ export default withStyles(({ reactDates: { color } }) => ({
     display: 'inline-block',
     verticalAlign: 'middle',
     padding: 10,
-    margin: '0 5px 0 10px',
+    margin: '0 5px 0 10px', // TODO: should be noflip wrapped and handled by an isRTL prop
   },
 
   SingleDatePickerInput_calendarIcon_svg: {
@@ -305,4 +312,4 @@ export default withStyles(({ reactDates: { color } }) => ({
     width: 14,
     verticalAlign: 'middle',
   },
-}))(SingleDatePickerInput);
+}), { pureComponent: typeof React.PureComponent !== 'undefined' })(SingleDatePickerInput);

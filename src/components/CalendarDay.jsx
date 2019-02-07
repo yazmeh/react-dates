@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import shallowCompare from 'react-addons-shallow-compare';
 import momentPropTypes from 'react-moment-proptypes';
 import { forbidExtraProps, nonNegativeInteger } from 'airbnb-prop-types';
 import { css, withStyles, withStylesPropTypes } from 'react-with-styles';
@@ -9,6 +8,7 @@ import moment from 'moment';
 import { CalendarDayPhrases } from '../defaultPhrases';
 import getPhrasePropTypes from '../utils/getPhrasePropTypes';
 import getCalendarDaySettings from '../utils/getCalendarDaySettings';
+import ModifiersShape from '../shapes/ModifiersShape';
 
 import { DAY_SIZE } from '../constants';
 
@@ -17,7 +17,7 @@ const propTypes = forbidExtraProps({
   day: momentPropTypes.momentObj,
   daySize: nonNegativeInteger,
   isOutsideDay: PropTypes.bool,
-  modifiers: PropTypes.instanceOf(Set),
+  modifiers: ModifiersShape,
   isFocused: PropTypes.bool,
   tabIndex: PropTypes.oneOf([0, -1]),
   onDayClick: PropTypes.func,
@@ -47,15 +47,11 @@ const defaultProps = {
   phrases: CalendarDayPhrases,
 };
 
-class CalendarDay extends React.Component {
+class CalendarDay extends React.PureComponent {
   constructor(...args) {
     super(...args);
 
     this.setButtonRef = this.setButtonRef.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return shallowCompare(this, nextProps, nextState);
   }
 
   componentDidUpdate(prevProps) {
@@ -146,6 +142,7 @@ class CalendarDay extends React.Component {
         )}
         role="button" // eslint-disable-line jsx-a11y/no-noninteractive-element-to-interactive-role
         ref={this.setButtonRef}
+        aria-disabled={modifiers.has('blocked')}
         aria-label={ariaLabel}
         onMouseEnter={(e) => { this.onDayMouseEnter(day, e); }}
         onMouseLeave={(e) => { this.onDayMouseLeave(day, e); }}
@@ -187,7 +184,7 @@ export default withStyles(({ reactDates: { color, font } }) => ({
 
     ':hover': {
       background: color.core.borderLight,
-      border: `1px double ${color.core.borderLight}`,
+      border: `1px solid ${color.core.borderLight}`,
       color: 'inherit',
     },
   },
@@ -200,9 +197,12 @@ export default withStyles(({ reactDates: { color, font } }) => ({
 
   CalendarDay__outside: {
     border: 0,
-
     background: color.outside.backgroundColor,
     color: color.outside.color,
+
+    ':hover': {
+      border: 0,
+    },
   },
 
   CalendarDay__blocked_minimum_nights: {
@@ -238,58 +238,62 @@ export default withStyles(({ reactDates: { color, font } }) => ({
 
   CalendarDay__selected_span: {
     background: color.selectedSpan.backgroundColor,
-    border: `1px solid ${color.selectedSpan.borderColor}`,
+    border: `1px double ${color.selectedSpan.borderColor}`,
     color: color.selectedSpan.color,
 
     ':hover': {
       background: color.selectedSpan.backgroundColor_hover,
-      border: `1px solid ${color.selectedSpan.borderColor}`,
+      border: `1px double ${color.selectedSpan.borderColor}`,
       color: color.selectedSpan.color_active,
     },
 
     ':active': {
       background: color.selectedSpan.backgroundColor_active,
-      border: `1px solid ${color.selectedSpan.borderColor}`,
+      border: `1px double ${color.selectedSpan.borderColor}`,
       color: color.selectedSpan.color_active,
     },
   },
 
   CalendarDay__last_in_range: {
-    borderRight: color.core.primary,
+    borderStyle: 'solid',
+
+    ':hover': {
+      borderStyle: 'solid',
+    },
   },
 
   CalendarDay__selected: {
     background: color.selected.backgroundColor,
-    border: `1px solid ${color.selected.borderColor}`,
+    border: `1px double ${color.selected.borderColor}`,
     color: color.selected.color,
 
     ':hover': {
       background: color.selected.backgroundColor_hover,
-      border: `1px solid ${color.selected.borderColor}`,
+      border: `1px double ${color.selected.borderColor}`,
       color: color.selected.color_active,
     },
 
     ':active': {
       background: color.selected.backgroundColor_active,
-      border: `1px solid ${color.selected.borderColor}`,
+      border: `1px double ${color.selected.borderColor}`,
       color: color.selected.color_active,
     },
   },
 
   CalendarDay__hovered_span: {
     background: color.hoveredSpan.backgroundColor,
-    border: `1px solid ${color.hoveredSpan.borderColor}`,
+    border: `1px double ${color.hoveredSpan.borderColor}`,
     color: color.hoveredSpan.color,
 
     ':hover': {
       background: color.hoveredSpan.backgroundColor_hover,
-      border: `1px solid ${color.hoveredSpan.borderColor}`,
+      border: `1px double ${color.hoveredSpan.borderColor}`,
       color: color.hoveredSpan.color_active,
     },
 
     ':active': {
       background: color.hoveredSpan.backgroundColor_active,
-      border: `1px solid ${color.hoveredSpan.borderColor}`,
+      border: `1px double ${color.hoveredSpan.borderColor}`,
       color: color.hoveredSpan.color_active,
     },
   },
@@ -335,4 +339,4 @@ export default withStyles(({ reactDates: { color, font } }) => ({
   CalendarDay__today: {},
   CalendarDay__firstDayOfWeek: {},
   CalendarDay__lastDayOfWeek: {},
-}))(CalendarDay);
+}), { pureComponent: typeof React.PureComponent !== 'undefined' })(CalendarDay);

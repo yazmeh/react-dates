@@ -8,7 +8,7 @@ import omit from 'lodash/omit';
 import DateTimeRangePicker from '../src/components/DateTimeRangePicker';
 
 import { DateRangePickerPhrases } from '../src/defaultPhrases';
-import DateRangePickerShape from '../src/shapes/DateRangePickerShape';
+import DateTimeRangePickerShape from '../src/shapes/DateTimeRangePickerShape';
 import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION, ANCHOR_LEFT } from '../src/constants';
 import isInclusivelyAfterDay from '../src/utils/isInclusivelyAfterDay';
 const today = moment().hour(12);
@@ -20,7 +20,7 @@ const propTypes = {
     initialStartDate: momentPropTypes.momentObj,
     initialEndDate: momentPropTypes.momentObj,
 
-    ...omit(DateRangePickerShape, [
+    ...omit(DateTimeRangePickerShape, [
         'startDate',
         'endDate',
         'onDatesChange',
@@ -55,7 +55,7 @@ const defaultProps = {
     is24HourFormat:true,
 
     // calendar presentation and interaction related props
-    renderMonth: null,
+    renderMonthText: null,
     orientation: HORIZONTAL_ORIENTATION,
     anchorDirection: ANCHOR_LEFT,
     horizontalMargin: 0,

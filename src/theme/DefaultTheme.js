@@ -1,6 +1,6 @@
 const core = {
   white: '#fff',
-  gray: '#565a5c',
+  gray: '#484848',
   grayLight: '#82888a',
   grayLighter: '#cacccd',
   grayLightest: '#f2f2f2',
@@ -41,6 +41,12 @@ export default {
         borderLeftFocused: 0,
         borderBottomFocused: `2px solid ${core.primary_dark}`,
         borderRightFocused: 0,
+        borderRadius: 0,
+      },
+      pickerInput: {
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderRadius: 2,
       },
     },
 
@@ -52,6 +58,7 @@ export default {
       background: core.white,
       backgroundDark: '#f2f2f2',
       backgroundFocused: core.white,
+      border: 'rgb(219, 219, 219)',
       text: core.gray,
       textDisabled: core.border,
       textFocused: '#007a87',
@@ -158,26 +165,27 @@ export default {
     },
 
     spacing: {
+      dayPickerHorizontalPadding: 9,
       captionPaddingTop: 22,
       captionPaddingBottom: 37,
       inputPadding: 0,
       displayTextPaddingVertical: 5,
-      displayTextPaddingTop: undefined,
-      displayTextPaddingBottom: undefined,
+      displayTextPaddingTop: 0,
+      displayTextPaddingBottom: 0,
       displayTextPaddingHorizontal: 10,
-      displayTextPaddingLeft: undefined,
+      displayTextPaddingLeft: 0,
       displayTextPaddingRight: 30,
       displayTextPaddingVertical_small: 5,
-      displayTextPaddingTop_small: undefined,
-      displayTextPaddingBottom_small: undefined,
+      displayTextPaddingTop_small: 0,
+      displayTextPaddingBottom_small: 0,
       displayTextPaddingHorizontal_small: 10,
-      displayTextPaddingLeft_small: undefined,
+      displayTextPaddingLeft_small: 0,
       displayTextPaddingRight_small: 30,
     },
 
     sizing: {
       inputWidth: 130,
-      inputWidth_small: 90,
+      inputWidth_small: 97,
       arrowWidth: 24,
       arrowWidth_small: 19,
       confirmButtonMinWidth: 175,
@@ -188,6 +196,8 @@ export default {
       },
     },
 
+    noScrollBarOnVerticalScrollable: false,
+
     font: {
       size: 14,
       captionSize: 18,
@@ -196,6 +206,7 @@ export default {
         lineHeight: '20px',
         size_small: 14,
         lineHeight_small: '18px',
+        letterSpacing_small: '0.2px',
         styleDisabled: 'italic',
       },
     },

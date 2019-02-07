@@ -13,7 +13,6 @@ export { default as DateTimeRangePicker } from './components/DateTimeRangePicker
 export { default as DayTimePickerRangeController } from './components/DayTimePickerRangeController';
 
 export { default as DayPickerSingleDateController } from './components/DayPickerSingleDateController';
-export { default as OutsideClickHandler } from './components/OutsideClickHandler';
 export { default as SingleDatePicker } from './components/SingleDatePicker';
 export { default as SingleDatePickerInput } from './components/SingleDatePickerInput';
 export { default as SingleDatePickerShape } from './shapes/SingleDatePickerShape';

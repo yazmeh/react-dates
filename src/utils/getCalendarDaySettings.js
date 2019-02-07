@@ -1,4 +1,4 @@
-import getPhrase from '../utils/getPhrase';
+import getPhrase from './getPhrase';
 import { BLOCKED_MODIFIER } from '../constants';
 
 export default function getCalendarDaySettings(day, ariaLabelFormat, daySize, modifiers, phrases) {
@@ -6,6 +6,8 @@ export default function getCalendarDaySettings(day, ariaLabelFormat, daySize, mo
     chooseAvailableDate,
     dateIsUnavailable,
     dateIsSelected,
+    dateIsSelectedAsStartDate,
+    dateIsSelectedAsEndDate,
   } = phrases;
 
   const daySizeStyles = {
@@ -35,10 +37,16 @@ export default function getCalendarDaySettings(day, ariaLabelFormat, daySize, mo
   const formattedDate = { date: day.format(ariaLabelFormat) };
 
   let ariaLabel = getPhrase(chooseAvailableDate, formattedDate);
-  if (modifiers.has(BLOCKED_MODIFIER)) {
+  if (selected) {
+    if (modifiers.has('selected-start') && dateIsSelectedAsStartDate) {
+      ariaLabel = getPhrase(dateIsSelectedAsStartDate, formattedDate);
+    } else if (modifiers.has('selected-end') && dateIsSelectedAsEndDate) {
+      ariaLabel = getPhrase(dateIsSelectedAsEndDate, formattedDate);
+    } else {
+      ariaLabel = getPhrase(dateIsSelected, formattedDate);
+    }
+  } else if (modifiers.has(BLOCKED_MODIFIER)) {
     ariaLabel = getPhrase(dateIsUnavailable, formattedDate);
-  } else if (selected) {
-    ariaLabel = getPhrase(dateIsSelected, formattedDate);
   }
 
   return {

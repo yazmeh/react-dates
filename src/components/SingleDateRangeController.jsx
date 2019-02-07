@@ -20,6 +20,7 @@ import { START_DATE, END_DATE, ICON_BEFORE_POSITION, OPEN_DOWN } from '../consta
 
 const propTypes = forbidExtraProps({
   startDate: momentPropTypes.momentObj,
+  children:PropTypes.node,
   startDateId: PropTypes.string,
   startDatePlaceholderText: PropTypes.string,
   isStartDateFocused: PropTypes.bool,
@@ -106,28 +107,32 @@ export default class SingleDateRangeController extends React.Component {
       endDatePlaceholderText,
       isEndDateFocused,
       isRTL,
+      children,
     } = this.props;
 
     const startDateString = this.getDateString(startDate);
     const endDateString = this.getDateString(endDate);
 
     return (
-      <SingleDateRange
-        inputDateTimeElement={inputDateTimeElement}
-        dateValues={{startDate,endDate}}
-        startDate={startDateString}
-        startDateId={startDateId}
-        startDatePlaceholderText={startDatePlaceholderText}
-        isStartDateFocused={isStartDateFocused}
-        rangeSeparator={rangeSeparator}
-        endDate={endDateString}
-        endDateId={endDateId}
-        showDefaultInputIcon={showDefaultInputIcon}
-        endDatePlaceholderText={endDatePlaceholderText}
-        isEndDateFocused={isEndDateFocused}
-        onStartDateFocus={this.onStartDateFocus}
-        isRTL={isRTL}
-      />
+      <React.Fragment>
+        <SingleDateRange
+          inputDateTimeElement={inputDateTimeElement}
+          dateValues={{startDate,endDate}}
+          startDate={startDateString}
+          startDateId={startDateId}
+          startDatePlaceholderText={startDatePlaceholderText}
+          isStartDateFocused={isStartDateFocused}
+          rangeSeparator={rangeSeparator}
+          endDate={endDateString}
+          endDateId={endDateId}
+          showDefaultInputIcon={showDefaultInputIcon}
+          endDatePlaceholderText={endDatePlaceholderText}
+          isEndDateFocused={isEndDateFocused}
+          onStartDateFocus={this.onStartDateFocus}
+          isRTL={isRTL}
+        />
+        {children}
+      </React.Fragment>
     );
   }
 }
