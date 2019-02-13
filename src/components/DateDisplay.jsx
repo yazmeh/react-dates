@@ -35,6 +35,11 @@ class DateDisplay extends React.Component {
       align,
       setFocus,
       isFocused,
+      format:{
+        date='DD',
+        month='MMMM',
+        year='YYYY'
+      }={},
     } = this.props
     return (
       <div onClick={setFocus}
@@ -50,7 +55,7 @@ class DateDisplay extends React.Component {
             {...css(
               styles.DateDisplay_Day
             )}>
-            {this.getDate("DD")}
+            {this.getDate(date)}
           </div>
           <div
             {...css(
@@ -60,7 +65,7 @@ class DateDisplay extends React.Component {
             <div className={'monthDisplay yearDisplay'}
               {...css(
                 styles.DateDisplay_MonthYear
-              )}>{this.getDate("MMMM YYYY")}</div>
+              )}>{this.getDate(`${month} ${year}`)}</div>
             <div className={'dowDisplay'}
               {...css(
                 styles.DateDisplay_DOW

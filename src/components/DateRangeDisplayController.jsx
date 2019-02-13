@@ -21,6 +21,7 @@ const propTypes = forbidExtraProps({
   onFocusChange: PropTypes.func,
   // accessibility
   isFocused: PropTypes.bool,
+  format:PropTypes.object,
 
   // i18n,
 });
@@ -70,6 +71,7 @@ export default class DateRangeDisplayController extends React.Component {
       endDateId,
       isEndDateFocused,
       isFocused,
+      format,
     } = this.props;
 
     return (
@@ -81,6 +83,7 @@ export default class DateRangeDisplayController extends React.Component {
         endDateId={endDateId}
         isEndDateFocused={isEndDateFocused}
         isFocused={isFocused}
+        format={format}
         onStartDateFocus={this.onStartDateFocus}
         onEndDateFocus={this.onEndDateFocus}
       />

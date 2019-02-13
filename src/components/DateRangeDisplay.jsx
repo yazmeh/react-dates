@@ -10,6 +10,7 @@ const propTypes = {
   startDate: momentPropTypes.momentObj,
   startDateId: PropTypes.string,
   isStartDateFocused: PropTypes.bool,
+  format: PropTypes.object,
   endDate: momentPropTypes.momentObj,
   endDateId: PropTypes.string,
   isEndDateFocused: PropTypes.bool,
@@ -28,6 +29,7 @@ function DateRangeDisplay(props) {
     endDateId,
     isEndDateFocused,
     onEndDateFocus,
+    format,
   } = props;
   return (
     <div
@@ -39,6 +41,7 @@ function DateRangeDisplay(props) {
         isFocused={isStartDateFocused}
         setFocus={onStartDateFocus}
         align="left"
+        format={format}
       />
       <div
         {...css(styles.DateRangeDisplay_arrow)}
@@ -55,6 +58,7 @@ function DateRangeDisplay(props) {
         isFocused={isEndDateFocused}
         setFocus={onEndDateFocus}
         align="right"
+        format={format}
       />
     </div>
   );

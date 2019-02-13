@@ -12,6 +12,7 @@ export default {
     endDate:momentPropTypes.momentObj,
   }),
   inputDateTimeElement:PropTypes.func,
+  displayRangeFormat:PropTypes.object,
   onApply:PropTypes.func,
   onCancel:PropTypes.func,
 };

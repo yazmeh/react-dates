@@ -462,6 +462,7 @@ class DateTimeRangePicker extends React.PureComponent {
       isDateRangePickerInputFocused,
       onApply,
       onCancel,
+      displayRangeFormat,
       disableMinutes,
       hideTime,
       is24HourFormat,
@@ -492,6 +493,7 @@ class DateTimeRangePicker extends React.PureComponent {
       isStartDateFocused:(focusedInput === START_DATE ),            
       endDate: selected.endDate,             
       endDateId:endDateId,            
+      format:displayRangeFormat,
       isEndDateFocused:(focusedInput === END_DATE) ,            
       onFocusChange:onFocusChange,            
       isFocused: isDateRangePickerInputFocused             
