@@ -426,6 +426,8 @@ class DateTimeRangePicker extends React.PureComponent {
       onPrevMonthClick,
       onNextMonthClick,
       onDatesChange,
+      minDate,
+      maxDate,
       onFocusChange,
       withPortal,
       withFullScreenPortal,
@@ -525,7 +527,8 @@ class DateTimeRangePicker extends React.PureComponent {
           hideTime={hideTime}
           displayRangeProp={displayRangeProp}
           is24HourFormat={is24HourFormat}
-
+          minDate={minDate}
+          maxDate={maxDate}
           orientation={orientation}
           enableOutsideDays={enableOutsideDays}
           numberOfMonths={numberOfMonths}

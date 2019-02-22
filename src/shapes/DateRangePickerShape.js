@@ -75,6 +75,8 @@ export default {
   transitionDuration: nonNegativeInteger,
   verticalSpacing: nonNegativeInteger,
   horizontalMonthPadding: nonNegativeInteger,
+  minDate:momentPropTypes.momentObj,
+  maxDate:momentPropTypes.momentObj,
 
   onApply: PropTypes.func,
   onCancel: PropTypes.func,
