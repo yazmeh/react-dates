@@ -790,7 +790,7 @@ export default class DayTimePickerRangeController extends React.PureComponent {
     }            
   }
   onMonthChange(newMonth) {
-    const { numberOfMonths, enableOutsideDays, orientation } = this.props;
+    const { numberOfMonths, enableOutsideDays, orientation, maxDate,minDate, } = this.props;
     const withoutTransitionMonths = orientation === VERTICAL_SCROLLABLE;
     const newVisibleDays = getVisibleDays(
       newMonth,
@@ -801,12 +801,14 @@ export default class DayTimePickerRangeController extends React.PureComponent {
 
     this.setState({
       currentMonth: newMonth.clone(),
+      disablePrev: this.shouldDisableMonthNavigation(minDate, newMonth.clone()),
+      disableNext: this.shouldDisableMonthNavigation(maxDate, newMonth.clone()),
       visibleDays: this.getModifiers(newVisibleDays),
     });
   }
 
   onYearChange(newMonth) {
-    const { numberOfMonths, enableOutsideDays, orientation } = this.props;
+    const { numberOfMonths, enableOutsideDays, orientation, maxDate,minDate } = this.props;
     const withoutTransitionMonths = orientation === VERTICAL_SCROLLABLE;
     const newVisibleDays = getVisibleDays(
       newMonth,
@@ -817,6 +819,8 @@ export default class DayTimePickerRangeController extends React.PureComponent {
 
     this.setState({
       currentMonth: newMonth.clone(),
+      disablePrev: this.shouldDisableMonthNavigation(minDate, newMonth.clone()),
+      disableNext: this.shouldDisableMonthNavigation(maxDate, newMonth.clone()),
       visibleDays: this.getModifiers(newVisibleDays),
     });
   }
