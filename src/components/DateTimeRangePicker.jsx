@@ -490,10 +490,10 @@ class DateTimeRangePicker extends React.PureComponent {
 
     const withAnyPortal = withPortal || withFullScreenPortal;
     const displayRangeProp={            
-      startDate:selected.startDate,            
+      startDate:startDate,            
       startDateId:startDateId,            
       isStartDateFocused:(focusedInput === START_DATE ),            
-      endDate: selected.endDate,             
+      endDate: endDate,             
       endDateId:endDateId,            
       format:displayRangeFormat,
       isEndDateFocused:(focusedInput === END_DATE) ,            
