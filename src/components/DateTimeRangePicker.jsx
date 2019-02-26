@@ -231,9 +231,9 @@ class DateTimeRangePicker extends React.PureComponent {
     onClose({ startDate, endDate });
   }
   dateChange({ startDate, endDate }) {            
-      if (startDate && endDate) {            
-        this.setState({ ...this.state, selected: { startDate, endDate } });            
-      }            
+      // if (startDate && endDate) {            
+      // }            
+      this.setState({ ...this.state, selected: { startDate, endDate } });            
       this.props.onDatesChange({ startDate, endDate });            
   }
   onDateRangePickerInputFocus(focusedInput) {
