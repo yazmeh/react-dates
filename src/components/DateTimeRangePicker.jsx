@@ -470,10 +470,11 @@ class DateTimeRangePicker extends React.PureComponent {
       is24HourFormat,
       startDateId,
       endDateId,
+      selected={},
       theme: { reactDates },
     } = this.props;
 
-    const { dayPickerContainerStyles, isDayPickerFocused, showKeyboardShortcuts,selected } = this.state;
+    const { dayPickerContainerStyles, isDayPickerFocused, showKeyboardShortcuts } = this.state;
 
     const onOutsideClick = (!withFullScreenPortal && withPortal)
       ? this.onOutsideClick
@@ -490,10 +491,10 @@ class DateTimeRangePicker extends React.PureComponent {
 
     const withAnyPortal = withPortal || withFullScreenPortal;
     const displayRangeProp={            
-      startDate:startDate,            
+      startDate:selected.startDate||startDate,            
       startDateId:startDateId,            
       isStartDateFocused:(focusedInput === START_DATE ),            
-      endDate: endDate,             
+      endDate: selected.endDate||endDate,             
       endDateId:endDateId,            
       format:displayRangeFormat,
       isEndDateFocused:(focusedInput === END_DATE) ,            
