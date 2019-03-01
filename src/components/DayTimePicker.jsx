@@ -45,6 +45,7 @@ import {
   INFO_POSITION_AFTER,
   MODIFIER_KEY_NAMES,
 } from '../constants';
+import TimePicker from "./TimePicker";
 
 const MONTH_PADDING = 23;
 const PREV_TRANSITION = 'prev';
@@ -960,6 +961,8 @@ class DayTimePicker extends React.PureComponent {
       is24HourFormat,
       startTime,
       endTime,
+      singleTime,
+      focused,
       disableMinutes,
       hideTime,
       displayRangeProp,
@@ -1062,7 +1065,7 @@ class DayTimePicker extends React.PureComponent {
               calendarInfoIsInline && isHorizontal && styles.DayTimePicker_wrapper__horizontal,
             )}
           >
-            <DateRangeDisplayController {...displayRangeProp} />
+            {!singleTime && <DateRangeDisplayController {...displayRangeProp} />}
             <div
               {...css(
                 styles.DayTimePicker_weekHeaders,
@@ -1129,14 +1132,24 @@ class DayTimePicker extends React.PureComponent {
                 />
                 {verticalScrollable && this.renderNavigation()}
               </div>
-              {!hideTime && <div>
+              {!hideTime && (!singleTime ?<div>
                 <TimeRangePicker
                   is24HourFormat={is24HourFormat}
                   startTime={startTime}
                   endTime={endTime}
                   onTimeChange={onTimeChange}
                   disableMinutes={disableMinutes}/>
-              </div>}
+              </div> : <div>
+                  <TimePicker
+                    time={singleTime}
+                    single
+                    type={focused}
+                    is24HourFormat={is24HourFormat}
+                    onTimeChange={onTimeChange}
+                    disableMinutes={disableMinutes}
+                    hourProps={{ tabIndex: 1 }}
+                  />
+                </div>)}
               {!isTouch && !hideKeyboardShortcutsPanel && (
                 <DayPickerKeyboardShortcuts
                   block={this.isVertical() && !withPortal}

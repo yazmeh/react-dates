@@ -256,6 +256,19 @@ export default withStyles((props) => {
   return {
     TimePicker: {
       width: '50%',
+      width: '50%',
+      ':only-child': {
+        width: '100%'
+      },
+      height: '90px',
+      backgroundColor: '#F0F6FB',
+      display: 'inline-flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      border: '1px solid #E7EAF0',
+    },
+    TimePicker_single: {
+      width: '100%',
       height: '90px',
       backgroundColor: '#F0F6FB',
       display: 'inline-flex',
