@@ -416,7 +416,7 @@ class SingleDateTimePicker extends React.PureComponent {
             horizontalMonthPadding,
             small,
             is24HourFormat,
-            hidetime,
+            hideTime,
             disableMinutes,
             theme: { reactDates },
         } = this.props;
@@ -455,7 +455,7 @@ class SingleDateTimePicker extends React.PureComponent {
             >
                 <DayPickerSingleDateTimeController
                     is24HourFormat={is24HourFormat}
-                    hidetime={hidetime}
+                    hideTime={hideTime}
                     disableMinutes={disableMinutes}
                     date={date}
                     onDateChange={onDateChange}
