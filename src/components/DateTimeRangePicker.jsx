@@ -271,7 +271,31 @@ class DateTimeRangePicker extends React.PureComponent {
       showKeyboardShortcuts: false,
     });
   }
+  detectIE() {
+    const ua = window.navigator.userAgent;
 
+    const msie = ua.indexOf('MSIE ');
+    if (msie > 0) {
+        // IE 10 or older => return version number
+        return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+
+    const trident = ua.indexOf('Trident/');
+    if (trident > 0) {
+        // IE 11 => return version number
+        const rv = ua.indexOf('rv:');
+        return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+
+    const edge = ua.indexOf('Edge/');
+    if (edge > 0) {
+      // Edge (IE 12+) => return version number
+      return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+    }
+
+    // other browser
+    return false;
+}
   onDayPickerFocusOut(event) {
     // In cases where **relatedTarget** is not null, it points to the right
     // element here. However, in cases where it is null (such as clicking on a
@@ -279,6 +303,9 @@ class DateTimeRangePicker extends React.PureComponent {
     //
     // We handle both situations here by using the ` || ` operator to fallback
     // to *event.target** when **relatedTarget** is not provided.
+    if(!!this.detectIE()){
+      if (this.dayPickerContainer.contains(event.target)) return;
+    }
     if (this.dayPickerContainer.contains(event.relatedTarget || event.target)) return;
     this.onOutsideClick(event);
   }
