@@ -779,13 +779,13 @@ export default class DayTimePickerRangeController extends React.PureComponent {
       this.setState({ ...this.state, startTime: time });            
       if (startDate) {            
         const startDate1 = startDate.clone().hour(time.hour()).minute(time.minute());            
-        onDatesChange({ startDate: startDate1, endDate });            
+        onDatesChange({ startDate: startDate1, endDate, timeUpdated:START_DATE });            
       }            
     } else if (type === END_DATE) {            
       this.setState({ ...this.state, endTime: time });            
       if (endDate) {            
         const endDate1 = endDate.clone().hour(time.hour()).minute(time.minute());            
-        onDatesChange({ startDate, endDate: endDate1 });            
+        onDatesChange({ startDate, endDate: endDate1, timeUpdated:END_DATE });            
       }            
     }            
   }
