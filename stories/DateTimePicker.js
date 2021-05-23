@@ -117,4 +117,12 @@ storiesOf('DateTimeRangePicker (DRP)', module)
             orientation={VERTICAL_ORIENTATION}
             verticalHeight={568}
         />
+    )))
+    .add('with custom daterangeDisplay',  withInfo()(() => (
+        <DateTimeRangePickerWrapper
+            renderDateRangeDisplay={({startDate, endDate}) => { console.log({startDate, endDate});
+                return ( <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: "20px"}}>
+                {startDate && startDate.format("YYYY/MM/DD")} - {endDate && endDate.format("YYYY/MM/DD")}
+            </div>); }}
+        />
     )));

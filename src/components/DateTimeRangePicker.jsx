@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import { css, withStyles, withStylesPropTypes } from 'react-with-styles';
 import { Portal } from 'react-portal';
 import { forbidExtraProps } from 'airbnb-prop-types';
@@ -39,6 +40,7 @@ import {
 const propTypes = forbidExtraProps({
   ...withStylesPropTypes,
   ...DateTimeRangePickerShape,
+  renderDateRangeDisplay: PropTypes.func,
 });
 
 const defaultProps = {
@@ -498,6 +500,7 @@ class DateTimeRangePicker extends React.PureComponent {
       startDateId,
       endDateId,
       selected={},
+      renderDateRangeDisplay,
       theme: { reactDates },
     } = this.props;
 
@@ -526,7 +529,8 @@ class DateTimeRangePicker extends React.PureComponent {
       format:displayRangeFormat,
       isEndDateFocused:(focusedInput === END_DATE) ,            
       onFocusChange:onFocusChange,            
-      isFocused: isDateRangePickerInputFocused             
+      isFocused: isDateRangePickerInputFocused,
+      renderDateRangeDisplay: renderDateRangeDisplay             
     }
     return (
       <div // eslint-disable-line jsx-a11y/no-static-element-interactions
